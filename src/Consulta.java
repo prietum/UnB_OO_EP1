@@ -1,6 +1,7 @@
 public class Consulta() {
-	Paciente pac;
-	Medico med;
-	Horario hor;
-	int status;
+	private Paciente pac;
+	private Medico med;
+	private Horario hor;
+	private int status;
+	private int id;
 }

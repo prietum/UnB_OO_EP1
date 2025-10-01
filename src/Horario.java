@@ -1,3 +1,5 @@
+//registra dia e horário > 1h quaisquer
+
 public class Horario {
 	private Dia dia;
 	private int t0; 

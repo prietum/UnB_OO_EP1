@@ -1,7 +1,8 @@
 public class PacienteEspecial extends Paciente {
 	
-	Plano getPlano() {
-		return Registro.getPlano(this.getNome());
-	}
+	private int idPlano;
 	
+	Plano getPlano() {
+		return Registro.getPlano(this.idPlano);
+	}
 }

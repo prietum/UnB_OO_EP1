@@ -1,7 +1,8 @@
 public class Internacao() {
-	Paciente pac;
-	Medico med;
-	Int dia0;
-	Int hor1;
-	int status;
+	private Paciente pac;
+	private Medico med;
+	private int dia0;
+	private int hor1;
+	private int status;
+	private int id;
 }

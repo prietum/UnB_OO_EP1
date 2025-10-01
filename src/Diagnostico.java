@@ -1,6 +1,7 @@
 public class Diagnostico() {
 	private String conclusao;
 	private Prescricao[] prescricoes;
+	private int id;
 	
 	Diagnostico(String conclusao) {
 		this.conclusao = conclusao;

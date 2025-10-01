@@ -1,6 +1,8 @@
+//registra período entre dois dias, sem horário específico
+
 public class Periodo {
-	private double t0;
-	private double t1;
+	private int t0;
+	private int t1;
 	
 	Periodo(double t0, double t1) {
 		this.t0 = t0;
