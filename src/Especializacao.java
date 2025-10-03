@@ -119,6 +119,6 @@ enum Especializacao{
 	}
 	
 	public String toString() {
-		return n.get(name())
+		return n.get(name());
 	}
 }

@@ -3,12 +3,6 @@ abstract class Pessoa{
 	private int cpf;
 	private int idade;
 	
-	Paciente(String nome, int cpf, int idade) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.idade = idade;
-	}
-	
 	boolean verifyNome(String a) {
 		return a.length() > 0;
 	}
@@ -21,10 +15,20 @@ abstract class Pessoa{
 		return a >= 0 && a <= 120;
 	}
 	
-	String getNome(){return nome}
-	void setNome(String nome){this.nome = nome}
-	String getCpf(){return cpf}
-	void setCpf(String cpf){this.cpf = cpf}
-	String getIdade(){return idade}
-	void setIdade(String idade){this.idade = idade}
+	String getNome(){return nome;}
+	void setNome(String nome){this.nome = nome;}
+	int getIntCpf(){return cpf;}
+	void setCpf(int cpf){this.cpf = cpf;}
+	int getIdade(){return idade;}
+	void setIdade(int idade){this.idade = idade;}
+	
+	String getStringCpf(){
+		String str = Integer(cpf).toString();
+		return String.format(
+			"%s.%s.%s-%s", 
+			str.substring(1,3), str.substring(4,6), str.substring(7,9), str.substring(10,11));
+		}
+		
+	@Override
+	abstract String toString(){}
 }

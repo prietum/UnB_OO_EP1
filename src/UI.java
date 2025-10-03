@@ -58,15 +58,6 @@ public class UI {
 	////
 	void dspReg(HashMap<int, Paciente> pacientes) {
 		String blobTitulo = "Sistema Hospitalar - Registro\n\n";
-		String blobPacientes = "";
-		String blobRegistro = "";
-		
-		for (Paciente paciente : pacientes.values()) {
-			blobPacientes = blobPacientes + String.format("→%i/t%i/t%s\n");
-		}
-		
-		blobRegistro = blobTitulo + blobPacientes;
-		
-		System.out.println(blobRegistro);
+		System.out.println(Registro.toString());
 	}
 }

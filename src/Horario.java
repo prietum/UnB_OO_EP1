@@ -15,12 +15,8 @@ public class Horario {
 		return (t0 < t1) && (t0 >= 0) && (t1 >= 1) && (t0 <= 23) and (t1 <= 24);
 	}
 	
-	public String getCodigo() {
-		return String.format("%i%02i%02i",
-			this.dia.toInt(), this.t0, this.t1
-		);
-	}
-	public String getExtenso() {
+	@Override
+	public String toString() {
 		return String.format("%s, %02i:00 - %02i:00.",
 			this.dia.toString(), this.t0, this.t1
 		);

@@ -1,6 +1,7 @@
 public class Main() implements UI{
 	//pcs :: "processa"
 	//stt :: "status", qual tela mostrar, quais entradas pedir, etc.
+	
 	private int stt;
 	
 	private void pcsMenu() {
