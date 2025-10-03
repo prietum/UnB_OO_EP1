@@ -23,6 +23,7 @@ call :Compilar src\PacienteEspecial.java
 call :Compilar src\Consulta.java
 call :Compilar src\Internacao.java
 call :Compilar src\Diagnostico.java
+call :Compilar src\Quarto.java
 
 call :Compilar src\Registro.java
 

@@ -30,7 +30,7 @@ public class Consulta {
 		}
 		
 		return String.format(
-			"#%i\n\tMédico: %s\n\tPaciente: %s\n\tHorário: %s\n\tStatus: %s",
+			"nº%i\n\tMédico: %s\n\tPaciente: %s\n\tHorário: %s\n\tStatus: %s",
 			this.id, this.med.getNome(), this.pac.getNome(), this.hor.toString(), blobStatus
 		);
 	}

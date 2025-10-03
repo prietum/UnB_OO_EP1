@@ -27,7 +27,7 @@ public class Diagnostico() {
 	@Override
 	public String toString() {
 		return String.format(
-			"#%i\n\tMédico: %s\n\tPaciente: %s\n\t\t%q\n\tPrescrição:\n%s",
+			"nº%i\n\tMédico: %s\n\tPaciente: %s\n\t\t%q\n\tPrescrição:\n%s",
 			this.id, this.med.getNome(), this.pac.getNome(), this.conclusao, this.getStringPrescricoes()
 		);
 	}

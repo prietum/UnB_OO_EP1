@@ -9,54 +9,65 @@ public class Registro {
 	HashMap<int, Internacao> internacoes = new HashMap<int, Internacao>();
 	HashMap<int, Diagnostico> diagnosticos = new HashMap<int, Diagnostico>();
 	HashMap<int, Plano> planos = new HashMap<int, Plano>();
+	HashMap<int, Quarto> quartos = new HashMap<int, Quarto>();
 	
 	////
 	Paciente getPaciente(int cpf){return this.pacientes.get(cpf);}
-	Paciente getMedico(int cpf){return this.medicos.get(cpf);}
-	Paciente getConsulta(int id){return this.consultas.get(id);}
-	Paciente getInternacao(int id){return this.internacoes.get(id);}
-	Paciente getDiagnostico(int id){return this.diagnosticos.get(id);}
+	Medico getMedico(int cpf){return this.medicos.get(cpf);}
+	Consulta getConsulta(int id){return this.consultas.get(id);}
+	Internacao getInternacao(int id){return this.internacoes.get(id);}
+	Diagnostico getDiagnostico(int id){return this.diagnosticos.get(id);}
+	Plano getPlano(int id){return this.planos.get(id);}
+	Quarto getQuarto(int id){return this.quartos.get(id);}
 	
 	////
 	void addPaciente(int cpf, Paciente paciente) {
-		
+		this.pacientes.put(cpf, paciente);
 	}
 	
 	void addMedico(int cpf, Medico medicos) {
-		
+		this.medicos.put(cpf, medicos);
 	}
 	
-	void addConsulta(int id, Consulta consultas) {
-		
+	void addConsulta(int id, Consulta consulta) {
+		this.consultas.put(id, consulta);
 	}
 	
-	void addInternacao(int id, Internacao internacoes) {
-		
+	void addInternacao(int id, Internacao internacao) {
+		this.internacoes.put(id, internacao);
 	}
 	
-	void addDiagnostico(int id, Diagnostico diagnosticos) {
-		
+	void addDiagnostico(int id, Diagnostico diagnostico) {
+		this.diagnosticos.put(id, diagnostico);
+	}
+	
+	void addPlano(int id, Plano plano) {
+		this.planos.put(id, plano);
+	}
+	
+	void addQuarto(int id, Quarto quarto) {
+		this.quartos.put(id, quarto);
 	}
 	
 	////
 	void remPaciente(int cpf) {
-		
+		this.pacientes.remove(cpf);
 	}
 	
 	void remMedico(int cpf) {
-		
+		this.medicos.remove(cpf);
 	}
 	
 	void remConsulta(int id) {
-		
+		this.consultas.remove(id);
 	}
 	
-	void remInternacao(int id) {
-		
+	void remPlano(int id) {
+		this.planos.remove(id);
 	}
 	
-	void remDiagnostico(int id) {
-		
+	void remQuarto(int id) {
+		this.quartos.remove(id);
 	}
 	
 	////
@@ -66,32 +77,37 @@ public class Registro {
 		
 		blobRegistro = blobRegistro + "~ Pessoas ~\n";
 		for (Paciente paciente : pacientes.values()) {
-			blobPessoas = blobPessoas + "\t" + paciente.toString() + "\n";
+			blobRegistro = blobRegistro + "\t" + paciente.toString() + "\n";
 		}
 		
 		blobRegistro = blobRegistro + "\n";
 		for (Medico medico : medicos.values()) {
-			blobPessoas = blobPessoas + medico.toString() + "\n";
+			blobRegistro = blobRegistro + medico.toString() + "\n";
 		}
 		
 		blobRegistro = blobRegistro + "\n~ Consultas ~\n";
 		for (Consulta consulta : consultas.values()) {
-			blobConsultas = blobConsultas + consulta.toString() + "\n";
+			blobRegistro = blobRegistro + consulta.toString() + "\n";
 		}
 		
 		blobRegistro = blobRegistro + "\n~ Internações ~\n";
 		for (Internacao internacao : internacoes.values()) {
-			blobInternacoes = blobInternacoes + internacao.toString() + "\n";
+			blobRegistro = blobRegistro + internacao.toString() + "\n";
 		}
 		
 		blobRegistro = blobRegistro + "\n~ Diagnósticos ~\n";
 		for (Diagnostico diagnostico : diagnosticos.values()) {
-			blobDiagnosticos = blobDiagnosticos + diagnostico.toString() + "\n";
+			blobRegistro = blobRegistro + diagnostico.toString() + "\n";
 		}
 		
 		blobRegistro = blobRegistro + "\n~ Planos ~\n";
 		for (Plano plano : planos.values()) {
-			blobPlanos = blobPlanos + plano.toString() + "\n";
+			blobRegistro = blobRegistro + plano.toString() + "\n";
+		}
+		
+		blobRegistro = blobRegistro + "\n~ Quartos ~\n";
+		for (Quarto quarto : quartos.values()) {
+			blobRegistro = blobRegistro + quarto.toString() + "\n";
 		}
 		
 		return blobRegistro;

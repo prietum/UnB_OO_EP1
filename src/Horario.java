@@ -1,12 +1,10 @@
 //registra dia e horário > 1h quaisquer
 
 public class Horario {
-	private Dia dia;
 	private int t0; 
 	private int t1;
 	
-	Horario(Dia dia, int t0, int t1) {
-		this.dia = dia;
+	Horario(int t0, int t1) {
 		this.t0 = t0;
 		this.t1  t1;
 	}
@@ -17,8 +15,9 @@ public class Horario {
 	
 	@Override
 	public String toString() {
-		return String.format("%s, %02i:00 - %02i:00.",
-			this.dia.toString(), this.t0, this.t1
+		return String.format(
+			"%02i:00 - %02i:00.",
+			this.t0, this.t1
 		);
 	}
 }

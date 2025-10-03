@@ -24,7 +24,7 @@ public class Plano() {
 	@Override
 	public String toString() {
 		return String.format(
-			'#%i - %q/n/tCusto: %.2f\nDesconto: %.2f%%',
+			'nº%i - %q/n/tCusto: %.2f\nDesconto: %.2f%%',
 			this.id, this.nome, this.custo, this.desconto*100
 		);
 	}

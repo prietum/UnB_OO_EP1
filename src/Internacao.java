@@ -3,10 +3,20 @@ import java.time;
 public class Internacao() {
 	private Paciente pac;
 	private Medico med;
-	private int t0;
-	private int t1;
+	private Periodo per;
 	private int status;
 	private int id;
+	
+	Internacao(Paciente pac, Medico med, String d0, Optional<String> d1, int status, int id) {
+		this.pac = pac;
+		this.med = med;
+		this.per = new Periodo(d0, d1.orElse(d1));
+		this.status = status;
+		this.id = id;
+	}
+	
+	void setConcluido(){this.status = 1;}
+	void setCancelado(){this.status = 2;}
 	
 	@Override
 	public String toString() {
