@@ -1,17 +1,17 @@
-public class Paciente extends Pessoa{
-	Pessoa(String nome, int cpf, int idade) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.idade = idade;
+public class Paciente extends Pessoa {
+	Paciente(String nome, int cpf, int idade) {
+		this.setNome(nome);
+		this.setCpf(cpf);
+		this.setIdade(idade);
 	}
 	
 	@Override
 	public String toString(){
 		return String.format(
 			"PCT-NORMAL\t\t %s\nCPF: %s\nIdade: %i",
-			this.nome,
+			this.getNome(),
 			this.getStringCpf(),
-			this.idade
+			this.getIdade()
 		);
 	}
 }

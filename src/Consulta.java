@@ -1,4 +1,4 @@
-import java.time;
+import java.time.*;
 
 public class Consulta {
 	private Paciente pac;
@@ -8,7 +8,7 @@ public class Consulta {
 	private int id;
 	
 	Consulta(Paciente pac, Medico med, Horario hor, int status, int id) {
-		this.pac = paciente;
+		this.pac = pac;
 		this.med = med;
 		this.hor = hor;
 		this.status = status;
@@ -18,15 +18,18 @@ public class Consulta {
 	@Override
 	public String toString() {
 		String blobStatus;
-		switch (this.status){
-			case: 0
-			blobStatus = "Agendada";break;
-			case: 1
-			blobStatus = "Concluída";break;
-			case: 2
-			blobStatus = "Cancelada";break;
+		switch (status){
+			case 0: 
+				blobStatus = "Agendada";
+				break;
+			case 1:
+				blobStatus = "Concluída";
+				break;
+			case 2:
+				blobStatus = "Cancelada";
+				break;
 			default:
-			blobStatus = "???";break;
+				blobStatus = "???";
 		}
 		
 		return String.format(

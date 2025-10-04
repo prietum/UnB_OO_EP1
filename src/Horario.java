@@ -6,11 +6,11 @@ public class Horario {
 	
 	Horario(int t0, int t1) {
 		this.t0 = t0;
-		this.t1  t1;
+		this.t1 = t1;
 	}
 	
 	public boolean verifyHor(int t0, int t1) {
-		return (t0 < t1) && (t0 >= 0) && (t1 >= 1) && (t0 <= 23) and (t1 <= 24);
+		return (t0 < t1) && (t0 >= 0) && (t1 >= 1) && (t0 <= 23) && (t1 <= 24);
 	}
 	
 	@Override

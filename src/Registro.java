@@ -3,13 +3,13 @@
 import java.util.HashMap;
 
 public class Registro {
-	HashMap<int, Paciente> pacientes = new HashMap<int, Paciente>();
-	HashMap<int, Medico> medicos = new HashMap<int, Medico>();
-	HashMap<int, Consulta> consultas = new HashMap<int, Consulta>();
-	HashMap<int, Internacao> internacoes = new HashMap<int, Internacao>();
-	HashMap<int, Diagnostico> diagnosticos = new HashMap<int, Diagnostico>();
-	HashMap<int, Plano> planos = new HashMap<int, Plano>();
-	HashMap<int, Quarto> quartos = new HashMap<int, Quarto>();
+	HashMap<Integer, Paciente> pacientes = new HashMap<Integer, Paciente>();
+	HashMap<Integer, Medico> medicos = new HashMap<Integer, Medico>();
+	HashMap<Integer, Consulta> consultas = new HashMap<Integer, Consulta>();
+	HashMap<Integer, Internacao> internacoes = new HashMap<Integer, Internacao>();
+	HashMap<Integer, Diagnostico> diagnosticos = new HashMap<Integer, Diagnostico>();
+	HashMap<Integer, Plano> planos = new HashMap<Integer, Plano>();
+	HashMap<Integer, Quarto> quartos = new HashMap<Integer, Quarto>();
 	
 	////
 	Paciente getPaciente(int cpf){return this.pacientes.get(cpf);}
@@ -72,7 +72,7 @@ public class Registro {
 	
 	////
 	@Override
-	String toString(){
+	public String toString(){
 		String blobRegistro = "";
 		
 		blobRegistro = blobRegistro + "~ Pessoas ~\n";

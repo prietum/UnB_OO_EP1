@@ -1,4 +1,4 @@
-abstract class Pessoa{
+abstract class Pessoa {
 	private String nome;
 	private int cpf;
 	private int idade;
@@ -23,12 +23,9 @@ abstract class Pessoa{
 	void setIdade(int idade){this.idade = idade;}
 	
 	String getStringCpf(){
-		String str = Integer(cpf).toString();
+		String str = Integer.toString(this.cpf);
 		return String.format(
 			"%s.%s.%s-%s", 
 			str.substring(1,3), str.substring(4,6), str.substring(7,9), str.substring(10,11));
 		}
-		
-	@Override
-	abstract String toString(){}
 }

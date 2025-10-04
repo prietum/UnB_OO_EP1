@@ -1,6 +1,6 @@
-import java.time;
+import java.util.Optional;
 
-public class Internacao() {
+public class Internacao{
 	private Paciente pac;
 	private Medico med;
 	private Periodo per;
@@ -10,7 +10,7 @@ public class Internacao() {
 	Internacao(Paciente pac, Medico med, String d0, Optional<String> d1, int status, int id) {
 		this.pac = pac;
 		this.med = med;
-		this.per = new Periodo(d0, d1.orElse(d1));
+		this.per = new Periodo(d0, d1);
 		this.status = status;
 		this.id = id;
 	}

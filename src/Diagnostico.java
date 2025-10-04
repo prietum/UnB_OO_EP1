@@ -1,6 +1,6 @@
-import java.time;
+import java.time.*;
 
-public class Diagnostico() {
+public class Diagnostico {
 	private String conclusao;
 	private Prescricao[] prescricoes;
 	//private data em que o documento foi feito aki
@@ -14,14 +14,14 @@ public class Diagnostico() {
 		this.conclusao = conclusao;
 	}
 	
-	void addPrescricao(String med, int quant) {prescricoes[prescricoes.length()] = new Prescricao(med, quant);}
+	void addPrescricao(String med, int quant) {this.prescricoes[this.prescricoes.length] = new Prescricao(med, quant);}
 	
 	String getStringPrescricoes() {
 		String blobPrescricoes = "";
-		for (i = 0; i < this.prescricoes.length(); i++) {
+		for (int i = 0; i < this.prescricoes.length; i++) {
 			blobPrescricoes = blobPrescricoes + String.format("\t\t→%s;\n", this.prescricoes[i].toString());
 		}
-		return blobPrescricoes
+		return blobPrescricoes;
 	}
 	
 	@Override
@@ -33,19 +33,20 @@ public class Diagnostico() {
 	}
 }
 
-private class Prescricao() {
+class Prescricao {
 	private String mdc;
 	private int quant;
 	
-	Prescricao(mdc, quant){
+	Prescricao(String mdc, int quant){
 		this.mdc = mdc;
 		this.quant = quant;
 	}
 	
 	String getMed(){return this.mdc;}
-	void setMed(mdc){this.mdc = mdc;}
-	String getQuant(){return this.quant;}
-	void setQuant(quant){this.quant = quant;}
+	int getQuant(){return this.quant;}
+	
+	void setMed(String mdc){this.mdc = mdc;}
+	void setQuant(int quant){this.quant = quant;}
 	
 	@Override
 	public String toString() {

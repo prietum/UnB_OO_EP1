@@ -9,26 +9,36 @@ IF "%selfWrapped%"=="" (
 )
 rem Tudo o que está escrito abaixo é meu. O excerto acima é derivado do site indicado.
 
-cd "%homepath%\Programacao\UnB_OO_EP1"
-call :Compilar src\Leitura.java
-call :Compilar src\Leitor.java
+cd "%homepath%\Programacao\UnB_OO_EP1"\src
+call :Compilar Leitura.java
+call :Compilar Leitor.java
 
-call :Compilar src\Pessoa.java
-call :Compilar src\Paciente.java
-call :Compilar src\Medico.java
+call :Compilar UF.java
+call :Compilar Especializacao.java
 
-call :Compilar src\Plano.java
-call :Compilar src\PacienteEspecial.java
+call :Compilar Crm.java
+call :Compilar Horario.java
+call :Compilar Periodo.java
 
-call :Compilar src\Consulta.java
-call :Compilar src\Internacao.java
-call :Compilar src\Diagnostico.java
-call :Compilar src\Quarto.java
+call :Compilar Pessoa.java
+call :Compilar Paciente.java
 
-call :Compilar src\Registro.java
+call :Compilar Medico.java
 
-call :Compilar src\UI.java
-call :Compilar src\Main.java
+call :Compilar Plano.java
+call :Compilar PacienteEspecial.java
+
+call :Compilar Consulta.java
+call :Compilar Internacao.java
+call :Compilar Diagnostico.java
+call :Compilar Quarto.java
+
+call :Compilar Registro.java
+
+call :Compilar UI.java
+call :Compilar Main.java
+
+GOTO Rodar
 
 :Compilar
 	javac %~1
@@ -41,6 +51,8 @@ call :Compilar src\Main.java
 		exit
 		)
 
-java src\Main
-
-pause
+:Rodar
+	java Main
+	
+	echo Programa concluído.
+	pause

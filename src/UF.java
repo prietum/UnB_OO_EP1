@@ -1,67 +1,40 @@
 import java.util.HashMap;
 
 enum UF {
-	RS,
-	SC,
-	PR,
-	SP,
-	MS,
-	MG,
-	RJ,
-	MG,
-	ES,
-	GO,
-	DF,
-	TO,
-	PI,
-	BA,
-	SE,
-	PB,
-	PE,
-	RN,
-	AL,
-	CE,
-	MA,
-	PA,
-	AM,
-	RO,
-	RR,
-	AC,
-	AP;
+	RS("Rio Grande do Sul"),
+	SC("Santa Catarina"),
+	PR("Paraná"),
+	SP("São Paulo"),
+	MS("Mato Grosso do Sul"),
+	MT("Mato Grosso"),
+	RJ("Rio de Janeiro"),
+	MG("Minas Gerais"),
+	ES("Espírito Santos"),
+	GO("Goiânia"),
+	DF("Distrito Federal"),
+	TO("Tocantins"),
+	PI("Piauí"),
+	BA("Bahia"),
+	SE("Sergipe"),
+	PB("Paraíba"),
+	PE("Pernambuco"),
+	RN("Rio Grande do Norte"),
+	AL("Alagoas"),
+	CE("Ceará"),
+	MA("Maranhão"),
+	PA("Pará"),
+	AM("Amapá"),
+	RO("Rondônia"),
+	RR("Roraima"),
+	AC("Acre"),
+	AP("Amapá");
 	
-	HashMap<String, String> n = new HashMap<String, String>();
-	do {
-		n.put("RS", "Rio Grande do Sul");
-		n.put("SC", "Santa Catarina");
-		n.put("PR", "Paraná");
-		n.put("SP", "São Paulo");
-		n.put("MS", "Mato Grosso do Sul");
-		n.put("MG", "Mato Grosso");
-		n.put("RJ", "Rio de Janeiro");
-		n.put("MG", "Minas Gerais");
-		n.put("ES", "Espírito Santos");
-		n.put("GO", "Goiânia");
-		n.put("DF", "Distrito Federal");
-		n.put("TO", "Tocantins");
-		n.put("PI", "Piauí");
-		n.put("BA", "Bahia");
-		n.put("SE", "Sergipe");
-		n.put("PB", "Paraíba");
-		n.put("PE", "Pernambuco");
-		n.put("RN", "Rio Grande do Norte");
-		n.put("AL", "Alagoas");
-		n.put("CE", "Ceará");
-		n.put("MA", "Maranhão");
-		n.put("PA", "Pará");
-		n.put("AM", "Amapá");
-		n.put("RO", "Rondônia");
-		n.put("RR", "Roraima");
-		n.put("AC", "Acre");
-		n.put("AP", "Amapá");
+	private final String nomeUf;
+	private UF(String nomeUf) {
+		this.nomeUf = nomeUf;
 	}
 	
-	@Override
-	String toString(){
-		return n.get(name());
+	public String getUF(){
+		return nomeUf;
 	}
 }

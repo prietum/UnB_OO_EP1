@@ -1,4 +1,4 @@
-public class Plano() {
+public class Plano {
 	private String nome;
 	private int id;
 	private float desconto;
@@ -17,14 +17,14 @@ public class Plano() {
 	float getCusto(){return this.custo;}
 	
 	void setNome(String nome){this.nome = nome;}
-	void setId(String id){this.id = id;}
-	void setDesconto(String desconto){this.desconto = desconto;}
-	void setCusto(String custo){this.custo = custo;}
+	void setId(int id){this.id = id;}
+	void setDesconto(float desconto){this.desconto = desconto;}
+	void setCusto(float custo){this.custo = custo;}
 	
 	@Override
 	public String toString() {
 		return String.format(
-			'nº%i - %q/n/tCusto: %.2f\nDesconto: %.2f%%',
+			"nº%i - %q/n/tCusto: %.2f\nDesconto: %.2f%%",
 			this.id, this.nome, this.custo, this.desconto*100
 		);
 	}

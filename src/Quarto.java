@@ -20,7 +20,7 @@ public class Quarto {
 		if (!this.isOcupado()) {
 			return 1;
 		} else {
-			this.optPac = new Optional.of(pac);
+			this.optPac = Optional.of(pac);
 			return 0;
 		}
 	}
@@ -28,10 +28,10 @@ public class Quarto {
 	@Override
 	public String toString(){
 		String blobOptPac;
-		if (this.isOcupado){
-			blobOptPac = this.optPac.get()
+		if (this.isOcupado()){
+			blobOptPac = this.optPac.get().getNome();
 		} else {
-			blobOptPac = "Vazio"
+			blobOptPac = "Vazio";
 		}
 		
 		return String.format(
