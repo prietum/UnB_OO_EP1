@@ -4,22 +4,22 @@ public class Internacao{
 	private Paciente pac;
 	private Medico med;
 	private Periodo per;
-	private int status;
-	private int id;
+	private Status status;
 	
-	Internacao(Paciente pac, Medico med, String d0, Optional<String> d1, int status, int id) {
+	Internacao(Paciente pac, Medico med, String d0, Optional<String> d1, Status status) {
 		this.pac = pac;
 		this.med = med;
 		this.per = new Periodo(d0, d1);
 		this.status = status;
-		this.id = id;
 	}
 	
-	void setConcluido(){this.status = 1;}
-	void setCancelado(){this.status = 2;}
+	void setConcluido(){this.status.setConcluido();}
+	void setCancelado(){this.status.setCancelado();}
 	
 	@Override
 	public String toString() {
-		return "nº%i\n\tMédico: %s\n\tPaciente: %s\n\t";
+		return String.format("\tMédico: %s\n\tPaciente: %s\n\tPeríodo: %s\n\tStatus: %s\n\t",
+			this.med.getNome(), this.pac.getNome(), this.per.toString(), this.status.toString()
+		);
 	}
 }

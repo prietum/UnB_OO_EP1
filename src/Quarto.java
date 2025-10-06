@@ -13,17 +13,11 @@ public class Quarto {
 		return this.optPac.isPresent();
 	}
 	
-	int setPacienteOcupante(Paciente pac){
-		//retorna 0 se ok
-		//retorna 1 se já está ocupado
-		
-		if (!this.isOcupado()) {
-			return 1;
-		} else {
-			this.optPac = Optional.of(pac);
-			return 0;
-		}
+	void setPacienteOcupante(Optional<Paciente> optPac){
+		this.optPac = optPac;
 	}
+	
+	public int getId(){return this.id;}
 	
 	@Override
 	public String toString(){

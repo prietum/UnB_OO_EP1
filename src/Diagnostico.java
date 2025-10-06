@@ -1,17 +1,17 @@
 import java.time.*;
 
 public class Diagnostico {
-	private String conclusao;
-	private Prescricao[] prescricoes;
-	//private data em que o documento foi feito aki
-	private Medico med;
 	private Paciente pac;
-	private int id;
+	private Medico med;
+	private String conclusao;
+	private LocalDate dat;
+	private Prescricao[] prescricoes;
 	
-	Diagnostico(Medico med, Paciente pac, String conclusao) {
+	Diagnostico(Medico med, Paciente pac, String conclusao, LocalDate dat) {
 		this.med = med;
 		this.pac = pac;
 		this.conclusao = conclusao;
+		this.dat = dat;
 	}
 	
 	void addPrescricao(String med, int quant) {this.prescricoes[this.prescricoes.length] = new Prescricao(med, quant);}
@@ -27,8 +27,8 @@ public class Diagnostico {
 	@Override
 	public String toString() {
 		return String.format(
-			"nº%i\n\tMédico: %s\n\tPaciente: %s\n\t\t%q\n\tPrescrição:\n%s",
-			this.id, this.med.getNome(), this.pac.getNome(), this.conclusao, this.getStringPrescricoes()
+			"\tMédico: %s\n\tPaciente: %s\n\t\t%q\n\tPrescrição:\n%s",
+			this.med.getNome(), this.pac.getNome(), this.conclusao, this.getStringPrescricoes()
 		);
 	}
 }

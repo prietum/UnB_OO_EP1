@@ -1,7 +1,7 @@
 public class PacienteEspecial extends Paciente {
 	Plano plano;
 	
-	PacienteEspecial(String nome, int cpf, int idade, Plano plano) {
+	PacienteEspecial(String nome, Cpf cpf, int idade, Plano plano) {
 		super(nome, cpf, idade);
 		this.plano = plano;
 	}
@@ -11,7 +11,7 @@ public class PacienteEspecial extends Paciente {
 		return String.format(
 			"PCT-ESPECIAL\t\t %s\nCPF: %s\nIdade: %i\nPlano: %q",
 			this.getNome(),
-			this.getStringCpf(),
+			this.getCpf().toString(),
 			this.getIdade(),
 			this.plano.getNome()
 		);

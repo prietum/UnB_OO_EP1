@@ -1,5 +1,5 @@
 public class Paciente extends Pessoa {
-	Paciente(String nome, int cpf, int idade) {
+	Paciente(String nome, Cpf cpf, int idade) {
 		this.setNome(nome);
 		this.setCpf(cpf);
 		this.setIdade(idade);
@@ -10,7 +10,7 @@ public class Paciente extends Pessoa {
 		return String.format(
 			"PCT-NORMAL\t\t %s\nCPF: %s\nIdade: %i",
 			this.getNome(),
-			this.getStringCpf(),
+			this.getCpf().toString(),
 			this.getIdade()
 		);
 	}

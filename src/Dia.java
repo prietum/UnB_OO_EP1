@@ -1,4 +1,4 @@
-import java.util.HashMap;
+/* import java.util.HashMap;
 
 enum Dia {
 	SEGUNDA,
@@ -38,4 +38,4 @@ enum Dia {
 	public int toInt() {
 		return i.get(name());
 	}
-}
+} */
