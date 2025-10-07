@@ -1,4 +1,5 @@
+cd %~dp0\bin
 java Main
 	
-echo Programa concluído.
 pause
+exit

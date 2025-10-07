@@ -9,11 +9,13 @@ public class Leitor {
 	
 	public Leitura lerString() {
 		String str = scn.nextLine();
+		str = str.replace("\n","").replace("\r","");
 		return new Leitura(str, true);
 	}
 	
 	public Leitura lerString(boolean obrigatorio) {
 		String str = scn.nextLine();
+		str = str.replace("\n","").replace("\r","");
 		if (obrigatorio && str.length() > 0) {
 			return new Leitura(str, true);
 		} else {
@@ -53,6 +55,57 @@ public class Leitor {
 		}
 	}
 	
+	public Leitura lerFlo() {
+		String str = scn.nextLine();
+		int i;
+		
+		try {
+			i = Float.valueOf(str);
+		} catch (NumberFormatException e) {
+			return new Leitura("Insira um número válido.", false);
+		}
+		
+		return new Leitura(i, true);
+	}
+	
+	public Leitura lerFlo(float n, float m) {
+		if (n > m) {
+			return new Leitura(String.format("Insira um número entre %d e %d.", n, m), false);
+		} else {
+			Leitura ltr = this.lerFlo();
+			float f = ltr.getFlo();
+			
+			if (!ltr.isOk()) {
+				return ltr;
+			}
+			
+			if (n <= f && f <= m) {
+				return ltr;
+			} else {
+				return new Leitura(String.format("Insira um número entre %d e %d.", n, m), false);
+			}
+		}
+	}
+	
+	public Leitura lerFlo(float n) {
+		if (n > m) {
+			return new Leitura(String.format("Insira um número maior ou igual a %d.", n), false);
+		} else {
+			Leitura ltr = this.lerFlo();
+			float f = ltr.getFlo();
+			
+			if (!ltr.isOk()) {
+				return ltr;
+			}
+			
+			if (n <= f) {
+				return ltr;
+			} else {
+				return new Leitura(String.format("Insira um número maior ou igual a %d.", n), false);
+			}
+		}
+	}
+	
 	public Leitura lerBoo() {
 		Leitura ltr = this.lerString(true);
 		if (!ltr.isOk()) {
@@ -76,22 +129,65 @@ public class Leitor {
 		}
 		
 		String str = ltr.getStr();
-		int i;
+		Seq digitos;
 		
 		try {
-			i = Integer.parseInt(str);
+			digitos = new Seq(str);
 		} catch (NumberFormatException e) {
-			return new Leitura("Insira somente números.", false);
+			return new Leitura("Insira somente números.\n"+e.getMessage(), false);
 		}
 		
 		if (str.length() != 11) {
 			return new Leitura("Insira um CPF de 11 dígitos.", false);
 		}
 		
-		return new Leitura(i, true);
+		return new Leitura(str, true);
 	}
 	
-/* 	public Leitura lerCrmInt() {
+	public Leitura lerCrm() {
+		Leitura ltr = this.lerString(true);
+		if (!ltr.isOk()) {
+			return ltr;
+		}
 		
-	} */
+		String str = ltr.getStr();
+		Seq digitos;
+		Uf uf;
+		
+		if (str.length() != 8) {
+			return new Leitura("Insira um CRM de 8 dígitos (6 números + 2 letras).", false);
+		}
+		
+		try {
+			digitos = new Seq(str.substring(0,6));
+		} catch (NumberFormatException e) {
+			return new Leitura("Os seis primeiros dígitos devem ser números.", false);
+		}
+		
+		try {
+			uf = UF.valueOf(str.substring(6,8));
+		} catch (NumberFormatException e) {
+			return new Leitura("Os dois últimos dígitos devem corresponder a uma unidade federativa válida.", false);
+		}
+		
+		return new Leitura(str, true);
+	}
+	
+	public Leitura lerEsp() {
+		Leitura ltr = this.lerString(true);
+		if (!ltr.isOk()) {
+			return ltr;
+		}
+		
+		String str = ltr.getStr();
+		Especializacao esp;
+		
+		try {
+			esp = Especializacao.valueOf(str);
+		} catch (NumberFormatException e) {
+			return new Leitura("Insira uma especialização válida.", false);
+		}
+		
+		return new Leitura(str, true);
+	}
 }

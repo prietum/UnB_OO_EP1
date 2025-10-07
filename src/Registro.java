@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Registro {
-	HashMap<Integer, Paciente> pacientes = new HashMap<Integer, Paciente>();
-	HashMap<Integer, Medico> medicos = new HashMap<Integer, Medico>();
-	ArrayList<Consulta> consultas = new ArrayList<Consulta>();
+	HashMap<String, Paciente> pacientes = new HashMap<String, Paciente>();
+	HashMap<String, Medico> medicos = new HashMap<String, Medico>();
+	ArrayList<Consulta> consultas = new ArrayList<Consulta>();				
 	ArrayList<Internacao> internacoes = new ArrayList<Internacao>();
 	ArrayList<Diagnostico> diagnosticos = new ArrayList<Diagnostico>();
 	HashMap<Integer, Plano> planos = new HashMap<Integer, Plano>();
@@ -22,8 +22,8 @@ public class Registro {
 	Quarto getQuarto(int id)			{return this.quartos.get(id);}
 	
 	////
-	void putPaciente(Paciente paciente) 			{this.pacientes.put(paciente.getCpf().getInt(), paciente);}
-	void putMedico(Medico medico) 					{this.medicos.put(medico.getCpf().getInt(), medico);}
+	void putPaciente(Paciente paciente) 			{this.pacientes.put(paciente.getCpf().getSeq().toString(), paciente);}
+	void putMedico(Medico medico) 					{this.medicos.put(medico.getCpf().getSeq().toString(), medico);}
 	void addConsulta(Consulta consulta) 			{this.consultas.add(consulta);}
 	void addInternacao(Internacao internacao) 		{this.internacoes.add(internacao);}
 	void addDiagnostico(Diagnostico diagnostico)	{this.diagnosticos.add(diagnostico);}

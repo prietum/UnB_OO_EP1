@@ -59,9 +59,9 @@ public class Main {
 	}
 	
 	private void pcsMenuReg() {
-		ui.dspMenuReg(reg);
+		ui.dspMenuReg();
 		
-		Leitura ltr = leitor.lerInt(1,2);
+		Leitura ltr = leitor.lerInt(1,3);
 		int c;
 		if (ltr.isOk()) {
 			stt = Integer.parseInt("3"+Integer.toString(ltr.getInt()));
@@ -81,7 +81,7 @@ public class Main {
 		Boolean hasPlano = null;
 		Plano plano = null;
 		
-		boolean repetir = false;
+		boolean confirma;
 		
 		while (true) {
 			ui.dspCadPac(
@@ -110,8 +110,8 @@ public class Main {
 				Leitura ltr = leitor.lerCpf();
 				
 				if (ltr.isOk()) {
-					int i = ltr.getInt();
-					cpf = new Cpf(i);
+					Seq digitos = new Seq(ltr.getStr());
+					cpf = new Cpf(digitos);
 					ui.dspClear();
 				} else {
 					ui.dspClear();
@@ -125,7 +125,7 @@ public class Main {
 				if (ltr.isOk()) {
 					int i = ltr.getInt();
 					if (0 <= i && i <= 120) {
-						idade = i;
+						idade = i;
 						ui.dspClear();
 					} else {
 						ui.dspClear();
@@ -136,12 +136,7 @@ public class Main {
 					System.out.println(ltr.getStr());
 				}
 				
-			} else if (hasPlano == null) {
-				if (reg.getPlanosSize() == 0) {
-					hasPlano = false;
-					break;
-				}
-				
+			} else if (hasPlano == null && reg.getPlanosSize() > 0) {
 				System.out.println("O paciente possui plano? (y/n)\n");
 				Leitura ltr = leitor.lerBoo();
 				
@@ -153,7 +148,7 @@ public class Main {
 					System.out.println(ltr.getStr());
 				}
 				
-			} else if (plano == null && hasPlano) {
+			} else if (plano == null && hasPlano != null && hasPlano) {
 				System.out.println(reg.toStringPlanos() + "\nDigite o número do plano do paciente.\n");
 				Leitura ltr = leitor.lerInt();
 				
@@ -171,41 +166,172 @@ public class Main {
 					ui.dspClear();
 					System.out.println(ltr.getStr());
 				}
-			}
-		
-			System.out.println("Confirmar? (y/n)");
-			Leitura ltr = leitor.lerBoo();
-			
-			if (ltr.isOk()) {
-				boolean b = ltr.getBoo();
-				repetir = !b;
-				break;
 			} else {
-				ui.dspClear();
-				System.out.println(ltr.getStr());
+				System.out.println("Confirmar? (y/n)");
+				Leitura ltr = leitor.lerBoo();
+				
+				if (ltr.isOk()) {
+					confirma = ltr.getBoo();
+					break;
+				} else {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+				}
 			}
 		}
 		
-		if (!repetir) {
+		ui.dspClear();
+		if (confirma) {
 			Paciente pac;
-			if (hasPlano) {
+			if (hasPlano != null && hasPlano && reg.getPlanosSize() > 0) {
 				pac = new PacienteEspecial(nome, cpf, idade, plano);
 			} else {
 				pac = new Paciente(nome, cpf, idade);
 			}
 			reg.putPaciente(pac);
 			
-			String.out.println("Paciente inserido.");
-			leitor.pausa();
-			ui.dspClear();
-			stt = 0;
+			System.out.println("O paciente foi cadastrado.");
+		} else {
+			System.out.println("O paciente não foi cadastrado.");
 		}
+		
+		stt = 0;
 	}
 	
 	private void pcsCadMed() {
-		System.out.println("Em stt: " + Integer.toString(stt));
-		leitor.pausa();
+		String nome = null;
+		Cpf cpf = null;
+		Integer idade = null;
+		Crm crm = null;
+		Especializacao esp = null;
+		Float custo = null;
+		Horario hor = null;
+		
+		boolean confirma;
+		
+		while (true) {
+			ui.dspCadPac(
+				Optional.ofNullable(nome),
+				Optional.ofNullable(cpf),
+				Optional.ofNullable(idade),
+				Optional.ofNullable(crm),
+				Optional.ofNullable(esp),
+				Optional.ofNullable(custo),
+				Optional.ofNullable(hor)
+			);
+			
+			if (nome == null) {
+				System.out.println("Digite o nome do médico.\n");
+				Leitura ltr = leitor.lerString();
+				
+				if (ltr.isOk()) {
+					String str = ltr.getStr();
+					nome = str;
+					ui.dspClear();
+				} else {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+				}
+				
+			} else if (cpf == null) {
+				System.out.println("Digite o CPF do médico (11 dígitos).\n");
+				Leitura ltr = leitor.lerCpf();
+				
+				if (ltr.isOk()) {
+					Seq digitos = new Seq(ltr.getStr());
+					cpf = new Cpf(digitos);
+					ui.dspClear();
+				} else {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+				}
+				
+			} else if (idade == null) {
+				System.out.println("Digite a idade do médico (entre 0 e 120).\n");
+				Leitura ltr = leitor.lerInt();
+				
+				if (ltr.isOk()) {
+					int i = ltr.getInt();
+					if (0 <= i && i <= 120) {
+						idade = i;
+						ui.dspClear();
+					} else {
+						ui.dspClear();
+						System.out.println(ltr.getStr());
+					}
+				} else {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+				}
+				
+			} else if (crm == null) {
+				System.out.println("Digite o CRM do médico (6 dígitos + UF).");
+				Leitura ltr = leitor.lerCrm();
+				
+				if (ltr.isOk()) {
+					String str = ltr.getStr();
+					crm = new Crm(str);
+					ui.dspClear();
+				} else {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+				}
+				
+			} else if (esp == null) {
+				System.out.println("Digite a especialização do médico.");
+				Leitura ltr = leitor.lerEsp();
+				
+				if (ltr.isOk()) {
+					String str = ltr.getStr();
+					esp = Especializacao.valueOf(str);
+					ui.dspClear();
+				} else {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+				}
+				
+			} else if (custo == null) {
+				System.out.println("Digite o custo da consulta com o médico.\n");
+				Leitura ltr = leitor.lerFlo(0);
+				
+				if (ltr.isOk()) {
+					custo = ltr.getFlo();
+					
+				} else {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+				}
+				
+			} else if (hor == null) {
+				System.out.println("Digite o horário disponibilizado pelo médico.\Formato: 'X Y', onde:\n\tambos devem ser número inteiros e estar entre 0 e 24;\n\tX deve ser menor que Y.\n\n\tExemplo: 12 14 == \"12:00-14:00\"");
+				
+				Leitura ltr = leitor.letStr();
+				// mecanika vai aki
+				
+			} else {
+				System.out.println("Confirmar? (y/n)");
+				Leitura ltr = leitor.lerBoo();
+				
+				if (ltr.isOk()) {
+					confirma = ltr.getBoo();
+					break;
+				} else {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+				}
+			}
+		}
+		
 		ui.dspClear();
+		if (confirma) {
+			Medico med = new Medico(nome, cpf, idade, crm, esp, custo, hor);
+			reg.putMedico(med);
+			
+			System.out.println("O médico foi cadastrado.");
+		} else {
+			System.out.println("O médico não foi cadastrado.");
+		}
+		
 		stt = 0;
 	}
 	
@@ -230,6 +356,7 @@ public class Main {
 		stt = 0;
 	}
 	
+	/// os dois abaixo servem somente para mudar o Status dos objetos.
 	private void pcsAtuzCons() {
 		System.out.println("Em stt: " + Integer.toString(stt));
 		leitor.pausa();
@@ -259,6 +386,14 @@ public class Main {
 	}
 	
 	private void pcsPrtReg() {
+		ui.dspPrtReg(reg);
+		
+		leitor.pausa();
+		ui.dspClear();
+		stt = 0;
+	}
+	
+	private void pcsSavReg() {
 		System.out.println("Em stt: " + Integer.toString(stt));
 		leitor.pausa();
 		ui.dspClear();
@@ -297,7 +432,8 @@ public class Main {
 						
 					case 3: pcsMenuReg(); break;
 						case 31: pcsPrtReg(); break;		//printar registro
-						case 32: pcsExpReg(); break;		//exportar registro
+						case 32: pcsExpReg(); break;		//exportar registro para data.txt
+						case 33: pcsSavReg(); break;		//salvar registro em /data/*.csv
 						
 					case 4: running = false; break;			//sair
 				

@@ -2,6 +2,7 @@
 
 public class Leitura {
 	private int ctt_int;
+	private float ctt_flo;
 	private String ctt_str;
 	private boolean ctt_boo;
 	
@@ -9,6 +10,10 @@ public class Leitura {
 	
 	public int getInt() {
 		return this.ctt_int;
+	}
+	
+	public int getFlo() {
+		return this.ctt_flo;
 	}
 	
 	public String getStr() {
@@ -26,6 +31,11 @@ public class Leitura {
 	Leitura(int ctt, boolean ok) {
 		this.ok = ok;
 		this.ctt_int = ctt;
+	}
+	
+	Leitura(float ctt, boolean ok) {
+		this.ok = ok;
+		this.ctt_flo = ctt;
 	}
 	
 	Leitura(String ctt, boolean ok) {

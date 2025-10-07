@@ -9,7 +9,7 @@ public class PacienteEspecial extends Paciente {
 	@Override
 	public String toString(){
 		return String.format(
-			"PCT-ESPECIAL\t\t %s\nCPF: %s\nIdade: %i\nPlano: %q",
+			"PCT-ESPECIAL\t\t %s\nCPF: %s\nIdade: %d\nPlano: %q",
 			this.getNome(),
 			this.getCpf().toString(),
 			this.getIdade(),

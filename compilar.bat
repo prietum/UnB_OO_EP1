@@ -1,53 +1,59 @@
 @echo off
 
 rem https://superuser.com/questions/80485/exit-batch-file-from-subroutine
-SETLOCAL
-IF "%selfWrapped%"=="" (
-  SET selfWrapped=true
-  %ComSpec% /s /c ""%~0" %*"
-  GOTO :EOF
-)
-rem Tudo o que está escrito abaixo é meu. O excerto acima é derivado do site indicado.
+REM SETLOCAL
+REM IF "%selfWrapped%"=="" (
+  REM SET selfWrapped=true
+  REM %ComSpec% /s /c ""%~0" %*"
+  REM GOTO :EOF
+REM )
+
+setlocal EnableDelayedExpansion
 
 chcp 65001
 
-cd "%homepath%\Programacao\UnB_OO_EP1"\src
-call :Compilar UF.java
-call :Compilar Especializacao.java
+if not exist %~dp0bin mkdir %~dp0bin
+cd %~dp0src
 
-call :Compilar Cpf.java
-call :Compilar Crm.java
-call :Compilar Status.java
+call :Compilar UF
+call :Compilar Especializacao
 
-call :Compilar Horario.java
-call :Compilar Periodo.java
+call :Compilar Seq
+call :Compilar Cpf
+call :Compilar Crm
+call :Compilar Status
 
-call :Compilar Pessoa.java
-call :Compilar Paciente.java
+call :Compilar Horario
+call :Compilar Periodo
 
-call :Compilar Medico.java
+call :Compilar Pessoa
+call :Compilar Paciente
 
-call :Compilar Plano.java
-call :Compilar PacienteEspecial.java
+call :Compilar Medico
 
-call :Compilar Consulta.java
-call :Compilar Internacao.java
-call :Compilar Diagnostico.java
-call :Compilar Quarto.java
+call :Compilar Plano
+call :Compilar PacienteEspecial
 
-call :Compilar Registro.java
+call :Compilar Consulta
+call :Compilar Internacao
+call :Compilar Diagnostico
+call :Compilar Quarto
 
-call :Compilar UI.java
+call :Compilar Registro
 
-call :Compilar Leitura.java
-call :Compilar Leitor.java
+call :Compilar UI
 
-call :Compilar Main.java
+call :Compilar Leitura
+call :Compilar Leitor
+
+call :Compilar Main
+
+pause
 
 GOTO Rodar
 
 :Compilar
-	javac %~1 -d "%homepath%\Programacao\UnB_OO_EP1"\bin -Xdiags:verbose
+	javac %~1.java -d %~dp0bin -Xdiags:verbose
 	if %ERRORLEVEL% EQU 0 (
 		echo %~1 compilou
 		exit /b 0
@@ -58,4 +64,6 @@ GOTO Rodar
 		)
 
 :Rodar
-	java "%homepath%\Programacao\UnB_OO_EP1"\bin\Main.class
+	cd ..
+	START rodar.bat
+	exit

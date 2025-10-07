@@ -1,11 +1,17 @@
 public class Crm {
-	private int digitos;
+	private Seq digitos;
 	private UF uf;
 	
-	Crm(int digitos, UF uf){
+	Crm(String str){
+		Seq digitos = new Seq(str.substring(0,6));
+		UF uf = UF.valueOf(str.substring(6,8));
+		
 		this.digitos = digitos;
 		this.uf = uf;
 	}
+	
+	public Seq getSeq(){return this.digitos;}
+	public UF getUf(){return this.uf;}
 	
 	/* public boolean verifyLength(String crm) {
 		return crm.length() == 8;
@@ -30,5 +36,5 @@ public class Crm {
 	} */
 	
 	@Override
-	public String toString(){return String.format("%i-%s", this.digitos, this.uf);}
+	public String toString(){return String.format("%i-%s", this.digitos.toString(), this.uf);}
 }
