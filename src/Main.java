@@ -867,18 +867,210 @@ public class Main {
 		stt = 0;
 	}
 	
-	/// os dois abaixo servem somente para mudar o Status dos objetos.
+	/// pcsAtuzCons() e pcsAtuzInter() servem para atualizar o status de Consulta e Internação de apenas "Agendada" para "Concluída" ou "Cancelada".
 	private void pcsAtuzCons() {
-		System.out.println("Em stt: " + Integer.toString(stt));
-		leitor.pausa();
+		boolean p0 = reg.getConsultasSize() > 0;
+		
+		if (!p0) {
+			ui.dspClear();
+			if (!p0) {System.out.println("Não há consultas no registro para atualizar. Adicione pelo menos 1 consulta.");}
+			stt = 0;
+			return;
+		}
+		
+		Integer consId = null;
+		Consulta cons = null
+		Integer dec = null;
+		
+		boolean confirma;
+		
+		while (true) {
+			ui.dspAtuzCons(
+				Optional.ofNullable(consId),
+				Optional.ofNullable(dec),
+			);
+			
+			if (consId == null) {
+				System.out.println(reg.toStringConsultas());
+				System.out.println("Digite o nº da consulta. Apenas consultas com status de \"agendada\" podem ser atualizadas.\n");
+				Leitura ltr = leitor.lerInt();
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				int i = ltr.getInt();
+				Consulta temp = reg.getConsulta(i);
+				if (temp == null) {
+					ui.dspClear();
+					System.out.println(String.format("Não existe consulta com nº %d.", i));
+					continue;
+				}
+				
+				consId = i;
+				cons = temp;
+				ui.dspClear();
+				
+				if (cons.getStatus.getInt() != 0) {
+					dec = 2;
+				}
+				
+			} else if (cons.getStatus.getInt() == 0) {
+				if (dec == null) {
+					System.out.println("Digite 0 para concluir a consulta e 1 para cancelar a consulta.\n");
+					Leitura ltr = leitor.lerInt(0,1);
+					
+					if (!ltr.isOk()) {
+						ui.dspClear();
+						System.out.println(ltr.getStr());
+						continue;
+					}
+					
+					int i = ltr.getInt();
+					dec = i;
+					
+					ui.dspClear();
+					
+				} else {
+					System.out.println("Confirmar? (y/n)");
+					leitor.pause();
+					
+					if (!ltr.isOk()) {
+						ui.dspClear();
+						System.out.println(ltr.getStr());
+						continue;
+					}
+					
+					confirma = ltr.getBoo();
+					break;
+				}
+			} else {
+				System.out.println("Não há como atualizar uma consulta já concluída ou cancelada. Pressione Enter para prosseguir para o menu principal.");
+				leitor.pause();
+				
+				break;
+			}
+		}
+		
 		ui.dspClear();
+		if (confirma) {
+			if (dec == 0) {
+				cons.setConcluido();
+				System.out.println("A consulta foi atualizada para \"concluída\".");
+			} else {
+				cons.setCancelado();
+				System.out.println("A consulta foi atualizada para \"cancelada\".");
+			}
+			
+		} else {
+			System.out.println("A consulta NÃO foi atualizada.");
+		}
+		
 		stt = 0;
 	}
 	
 	private void pcsAtuzInter() {
-		System.out.println("Em stt: " + Integer.toString(stt));
-		leitor.pausa();
+		boolean p0 = reg.getInternacoesSize() > 0;
+		
+		if (!p0) {
+			ui.dspClear();
+			if (!p0) {System.out.println("Não há internações no registro para atualizar. Adicione pelo menos 1 internação.");}
+			stt = 0;
+			return;
+		}
+		
+		Integer interId = null;
+		Internacao inter = null
+		Integer dec = null;
+		
+		boolean confirma;
+		
+		while (true) {
+			ui.dspAtuzCons(
+				Optional.ofNullable(interId),
+				Optional.ofNullable(dec),
+			);
+			
+			if (interId == null) {
+				System.out.println(reg.toStringInternacoes());
+				System.out.println("Digite o nº da internação. Apenas internações com status de \"agendada\" podem ser atualizadas.\n");
+				Leitura ltr = leitor.lerInt();
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				int i = ltr.getInt();
+				Internacao temp = reg.getInternacao(i);
+				if (temp == null) {
+					ui.dspClear();
+					System.out.println(String.format("Não existe internação com nº %d.", i));
+					continue;
+				}
+				
+				interId = i;
+				inter = temp;
+				ui.dspClear();
+				
+				if (inter.getStatus.getInt() != 0) {
+					dec = 2;
+				}
+				
+			} else if (cons.getStatus.getInt() == 0) {
+				if (dec == null) {
+					System.out.println("Digite 0 para concluir a internação e 1 para cancelar a internação.\n");
+					Leitura ltr = leitor.lerInt(0,1);
+					
+					if (!ltr.isOk()) {
+						ui.dspClear();
+						System.out.println(ltr.getStr());
+						continue;
+					}
+					
+					int i = ltr.getInt();
+					dec = i;
+					
+					ui.dspClear();
+					
+				} else {
+					System.out.println("Confirmar? (y/n)");
+					leitor.pause();
+					
+					if (!ltr.isOk()) {
+						ui.dspClear();
+						System.out.println(ltr.getStr());
+						continue;
+					}
+					
+					confirma = ltr.getBoo();
+					break;
+				}
+			} else {
+				System.out.println("Não há como atualizar uma internação já concluída ou cancelada. Pressione Enter para prosseguir para o menu principal.");
+				leitor.pause();
+				
+				break;
+			}
+		}
+		
 		ui.dspClear();
+		if (confirma) {
+			if (dec == 0) {
+				inter.setConcluido();
+				System.out.println("A internação foi atualizada para \"concluída\".");
+			} else {
+				inter.setCancelado();
+				System.out.println("A internação foi atualizada para \"cancelada\".");
+			}
+			
+		} else {
+			System.out.println("A internação NÃO foi atualizada.");
+		}
+		
 		stt = 0;
 	}
 	

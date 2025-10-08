@@ -284,15 +284,67 @@ public class UI {
 	}
 	
 	public void dspAtuzCons(
-		
+		Optional<Integer> optConsId, //id da consulta
+		Optional<Integer> optDec, //Dec -> decisao
 		) {
 		
+		String blobCons;
+		String blobDec;
+		
+		if (optConsId.isPresent()) {
+			blobCons = String.format("\tConsulta: nº%d\n");
+		} else {
+			blobCons = String.format("\tConsulta: ...\n");
+		}
+		
+		if (optDec.isPresent()) {
+			if (optDec.get() == 0) {
+				blobDec = String.format("\tAção: concluir consulta\n");
+			} else if (optDec.get() == 1) {
+				blobDec = String.format("\tAção: cancelar consulta\n");
+			} else {
+				blobDec = String.format("\tAção: nenhuma\n");
+			}
+		} else {
+			blobDec = "\tAção: ...\n";
+		}
+		
+		System.out.println(
+			"Sistema Hospitalar - Atualização de status de consulta\n\n" + 
+			blobCons + blobDec +
+			"\n");
 	}
 	
 	public void dspAtuzInter(
-		
+		Optional<Integer> optInterId, //id da internacao
+		Optional<Integer> optDec,  //Dec -> decisao
 		) {
 		
+		String blobInter;
+		String blobDec;
+		
+		if (optInterId.isPresent()) {
+			blobInter = String.format("\tInternação: nº%d\n");
+		} else {
+			blobInter = String.format("\tInternação: ...\n");
+		}
+		
+		if (optDec.isPresent()) {
+			if (optDec.get() == 0) {
+				blobDec = String.format("\tAção: concluir internação\n");
+			} else if (optDec.get() == 1) {
+				blobDec = String.format("\tAção: cancelar internação\n");
+			} else {
+				blobDec = String.format("\tAção: nenhuma\n");
+			}
+		} else {
+			blobDec = "\tAção: ...\n";
+		}
+		
+		System.out.println(
+			"Sistema Hospitalar - Atualização de status de internação\n\n" + 
+			blobInter + blobDec +
+			"\n");
 	}
 	
 	public void dspMenuAdmin() {
