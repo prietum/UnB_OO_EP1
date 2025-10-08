@@ -8,16 +8,6 @@ enum Especializacao{
 	ANESTESIOLOGIA("Anestesiologia"),
 	ANGIOLOGIA("Angiologia"),
 	CARDIOLOGIA("Cardiologia"),
-	CIR_CARDIO("Cirurgia cardiovascular"),
-	CIR_MAO("Cirurgia da mão"),
-	CIR_CABECA("Cirurgia de cabeça e pescoço"),
-	CIR_DIGESTIVO("Cirurgia do aparelho digestivo"),
-	CIR_GERAL("Cirurgia geral"),
-	CIR_ONCOLOGICA("Cirurgia oncológica"),
-	CIR_PEDIATRICA("Cirurgia pediátrica"),
-	CIR_PLASTICA("Cirurgia plástica"),
-	CIR_TORACICA("Cirurgia torácica"),
-	CIR_VASCULAR("Cirurgia vascular"),
 	CLINICA_MEDICA("Clínica médica"),
 	COLOPROCTOLOGIA("Coloproctologia"),
 	DERMATOLOGIA("Dermatologia"),
@@ -31,26 +21,13 @@ enum Especializacao{
 	HOMEOPATIA("Homeopatia"),
 	INFECTOLOGIA("Infectologia"),
 	MASTOLOGIA("Mastologia"),
-	MED_EMERGENCIA("Medicina de emergência"),
-	MED_FAMILIA("Medicina de família e comunidade"),
-	MED_TRABALHO("Medicina do trabalho"),
-	MED_TREFEGO("Medicina do tráfego"),
-	MED_ESPORTIVA("Medicina esportiva"),
-	MED_FISICA("Medicina física e reabilitação"),
-	MED_INTENSIVA("Medicina intensiva"),
-	MED_LEGAL("Medicina legal e perícia médica"),
-	MED_NUCLEAR("Medicina nuclear"),
-	MED_PREVENTIVA("Medicina preventiva e social"),
-	MED_LABORATORIAL("Nefrologia"),
-	NEFROLOGIA("Neurocirurgia"),
-	NEUROCIRURGIA("Neurologia"),
-	NEUROLOGIA("Nutrologia"),
-	NUTROLOGIA("Oftalmologia"),
-	OFTALMOLOGIA("Oncologia clínica"),
-	ONCOLOGIA("Ortopedia e traumatologia"),
-	ORTOPEDIA("Otorrinolaringologia"),
-	OTORRINOLARINGOLOGIA("Patologia"),
-	PATOLOGIA("Patologia clínica/medicina laboratorial"),
+	NEUROLOGIA("Neurologia"),
+	NUTROLOGIA("Nutrologia"),
+	OFTALMOLOGIA("Oftalmologia"),
+	ONCOLOGIA("Oncologia clínica"),
+	ORTOPEDIA("Ortopedia e traumatologia"),
+	OTORRINOLARINGOLOGIA("Otorrinolaringologia"),
+	PATOLOGIA("Patologia"),
 	PEDIATRIA("Pediatria"),
 	PNEUMOLOGIA("Pneumologia"),
 	PSIQUIATRIA("Psiquiatria"),
@@ -64,7 +41,8 @@ enum Especializacao{
 		this.nomeEsp = nomeEsp;
 	}
 	
-	public String getEsp() {
+	@Override
+	public String toString() {
 		return nomeEsp;
 	}
 }

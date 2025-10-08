@@ -36,5 +36,5 @@ public class Crm {
 	} */
 	
 	@Override
-	public String toString(){return String.format("%i-%s", this.digitos.toString(), this.uf);}
+	public String toString(){return String.format("%s-%s", this.digitos.toString(), this.uf.name());}
 }

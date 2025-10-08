@@ -12,7 +12,7 @@ public class Leitura {
 		return this.ctt_int;
 	}
 	
-	public int getFlo() {
+	public float getFlo() {
 		return this.ctt_flo;
 	}
 	

@@ -1,5 +1,8 @@
 @echo off
 
+chcp 65001
+title Gerente de Compilação
+
 rem https://superuser.com/questions/80485/exit-batch-file-from-subroutine
 REM SETLOCAL
 REM IF "%selfWrapped%"=="" (
@@ -9,8 +12,6 @@ REM IF "%selfWrapped%"=="" (
 REM )
 
 setlocal EnableDelayedExpansion
-
-chcp 65001
 
 if not exist %~dp0bin mkdir %~dp0bin
 cd %~dp0src
@@ -48,8 +49,6 @@ call :Compilar Leitor
 
 call :Compilar Main
 
-pause
-
 GOTO Rodar
 
 :Compilar
@@ -65,5 +64,5 @@ GOTO Rodar
 
 :Rodar
 	cd ..
-	START rodar.bat
+	START /MAX rodar.bat
 	exit

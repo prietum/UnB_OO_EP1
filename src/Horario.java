@@ -16,7 +16,7 @@ public class Horario {
 	@Override
 	public String toString() {
 		return String.format(
-			"%02i:00 - %02i:00.",
+			"%02d:00 - %02d:00.",
 			this.t0, this.t1
 		);
 	}

@@ -1,4 +1,8 @@
+// serve para abstrair a leitura de valores
+
 import java.util.Scanner;
+import java.time.*;
+import java.time.format.DateTimeParseException;
 
 public class Leitor {
 	private Scanner scn = new Scanner(System.in);
@@ -56,16 +60,22 @@ public class Leitor {
 	}
 	
 	public Leitura lerFlo() {
-		String str = scn.nextLine();
-		int i;
+		Leitura ltr = this.lerString();
+		
+		if (!ltr.isOk()) {
+			return ltr;
+		}
+		
+		String str = ltr.getStr();
+		float f;
 		
 		try {
-			i = Float.valueOf(str);
+			f = Float.valueOf(str);
 		} catch (NumberFormatException e) {
 			return new Leitura("Insira um número válido.", false);
 		}
 		
-		return new Leitura(i, true);
+		return new Leitura(f, true);
 	}
 	
 	public Leitura lerFlo(float n, float m) {
@@ -73,11 +83,11 @@ public class Leitor {
 			return new Leitura(String.format("Insira um número entre %d e %d.", n, m), false);
 		} else {
 			Leitura ltr = this.lerFlo();
-			float f = ltr.getFlo();
-			
 			if (!ltr.isOk()) {
 				return ltr;
 			}
+			
+			float f = ltr.getFlo();
 			
 			if (n <= f && f <= m) {
 				return ltr;
@@ -88,22 +98,18 @@ public class Leitor {
 	}
 	
 	public Leitura lerFlo(float n) {
-		if (n > m) {
-			return new Leitura(String.format("Insira um número maior ou igual a %d.", n), false);
-		} else {
-			Leitura ltr = this.lerFlo();
-			float f = ltr.getFlo();
-			
+		Leitura ltr = this.lerFlo();
 			if (!ltr.isOk()) {
 				return ltr;
 			}
 			
-			if (n <= f) {
-				return ltr;
-			} else {
-				return new Leitura(String.format("Insira um número maior ou igual a %d.", n), false);
-			}
+		float f = ltr.getFlo();
+			
+		if (n > f) {
+			return new Leitura(String.format("Insira um número maior ou igual a %d.", n), false);
 		}
+		
+		return ltr;
 	}
 	
 	public Leitura lerBoo() {
@@ -150,23 +156,21 @@ public class Leitor {
 			return ltr;
 		}
 		
-		String str = ltr.getStr();
-		Seq digitos;
-		Uf uf;
+		String str = ltr.getStr().toUpperCase();
 		
 		if (str.length() != 8) {
 			return new Leitura("Insira um CRM de 8 dígitos (6 números + 2 letras).", false);
 		}
 		
 		try {
-			digitos = new Seq(str.substring(0,6));
+			new Seq(str.substring(0,6));
 		} catch (NumberFormatException e) {
 			return new Leitura("Os seis primeiros dígitos devem ser números.", false);
 		}
 		
 		try {
-			uf = UF.valueOf(str.substring(6,8));
-		} catch (NumberFormatException e) {
+			UF.valueOf(str.substring(6,8));
+		} catch (IllegalArgumentException e) {
 			return new Leitura("Os dois últimos dígitos devem corresponder a uma unidade federativa válida.", false);
 		}
 		
@@ -179,13 +183,29 @@ public class Leitor {
 			return ltr;
 		}
 		
-		String str = ltr.getStr();
-		Especializacao esp;
+		String str = ltr.getStr().toUpperCase();
 		
 		try {
-			esp = Especializacao.valueOf(str);
-		} catch (NumberFormatException e) {
+			Especializacao.valueOf(str);
+		} catch (IllegalArgumentException e) {
 			return new Leitura("Insira uma especialização válida.", false);
+		}
+		
+		return new Leitura(str, true);
+	}
+	
+	public Leitura lerDat() {
+		Leitura ltr = this.lerString(true);
+		if (!ltr.isOk()) {
+			return ltr;
+		}
+		
+		String str = ltr.getStr();
+		
+		try {
+			LocalDate.parse(str);
+		} catch (DateTimeParseException e) {
+			return new Leitura("Insira a data de acordo com o formato aaaa-mm-dd (ano, mês, dia).", false);
 		}
 		
 		return new Leitura(str, true);

@@ -8,7 +8,7 @@ public class Paciente extends Pessoa {
 	@Override
 	public String toString(){
 		return String.format(
-			"PCT-NORMAL\t%s\n\tCPF: %s\n\tIdade: %d",
+			"%s (normal)\n\tCPF: %s\n\tIdade: %d",
 			this.getNome(),
 			this.getCpf().toString(),
 			this.getIdade()

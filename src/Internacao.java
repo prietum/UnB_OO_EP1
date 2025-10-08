@@ -4,12 +4,14 @@ public class Internacao{
 	private Paciente pac;
 	private Medico med;
 	private Periodo per;
+	private Quarto qua;;
 	private Status status;
 	
-	Internacao(Paciente pac, Medico med, String d0, Optional<String> d1, Status status) {
+	Internacao(Paciente pac, Medico med, Periodo per, Quarto qua, Status status) {
 		this.pac = pac;
 		this.med = med;
-		this.per = new Periodo(d0, d1);
+		this.per = per;
+		this.qua = qua;
 		this.status = status;
 	}
 	
@@ -18,8 +20,8 @@ public class Internacao{
 	
 	@Override
 	public String toString() {
-		return String.format("\tMédico: %s\n\tPaciente: %s\n\tPeríodo: %s\n\tStatus: %s\n\t",
-			this.med.getNome(), this.pac.getNome(), this.per.toString(), this.status.toString()
+		return String.format("\tMédico: %s\n\tPaciente: %s\n\tPeríodo: %s\n\tQuarto: nº%d\n\tStatus: %s",
+			this.med.getNome(), this.pac.getNome(), this.per.toString(), this.qua.getId(), this.status.toString()
 		);
 	}
 }

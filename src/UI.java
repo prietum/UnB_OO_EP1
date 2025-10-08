@@ -1,9 +1,10 @@
 import java.util.HashMap;
 import java.util.Optional;
+import java.time.*;
 
 public class UI {
 	public void dspClear() {
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	}
 	
 	public void dspMenuPrincipal() {
@@ -74,14 +75,14 @@ public class UI {
 		System.out.println("Sistema Hospitalar - Cadastro de Paciente\n\n" + blobNome + blobCpf + blobIdade + blobPlano + "\n");
 	}
 	
-	public void dspCadMed(){
+	public void dspCadMed(
 		Optional<String> optNome, 
 		Optional<Cpf> optCpf, 
 		Optional<Integer> optIdade, 
 		Optional<Crm> optCrm, 
 		Optional<Especializacao> optEsp,
 		Optional<Float> optCusto,
-		Optional<Horario> optHor,
+		Optional<Horario> optHor
 		) {
 			
 		String blobNome;
@@ -111,27 +112,27 @@ public class UI {
 		}
 		
 		if (optCrm.isPresent()) {
-			blobIdade = String.format("\tCRM: %s\n", optCrm.get().toString());
+			blobCrm = String.format("\tCRM: %s\n", optCrm.get().toString());
 		} else {
-			blobIdade = String.format("\tCRM: ...\n");
+			blobCrm = String.format("\tCRM: ...\n");
 		}
 		
 		if (optEsp.isPresent()) {
-			blobEsp = String.format("\Especialização: %s\n", optEsp.get().toString());
+			blobEsp = String.format("\tEspecialização: %s\n", optEsp.get().toString());
 		} else {
-			blobEsp = String.format("\Especialização: ...\n");
+			blobEsp = String.format("\tEspecialização: ...\n");
 		}
 		
 		if (optCusto.isPresent()) {
-			blobCusto = String.format("\Custo: R$%d\n", optCusto.get());
+			blobCusto = String.format("\tCusto: R$%.2f\n", optCusto.get());
 		} else {
-			blobCusto = String.format("\Custo: ...\n");
+			blobCusto = String.format("\tCusto: ...\n");
 		}
 		
 		if (optHor.isPresent()) {
-			blobHor = String.format("\Horário: %s\n", optHor.get().toString());
+			blobHor = String.format("\tHorário: %s\n", optHor.get().toString());
 		} else {
-			blobHor = String.format("\Horário: ...\n");
+			blobHor = String.format("\tHorário: ...\n");
 		}
 		
 		System.out.println(
@@ -141,21 +142,145 @@ public class UI {
 	}
 	
 	public void dspCadCons(
-		
+		Optional<Paciente> optPac, 
+		Optional<Medico> optMed, 
+		Optional<LocalDate> optDat, 
+		Optional<Status> optStatus
 		) {
+			
+		String blobPac;
+		String blobMed;
+		String blobDat;
+		String blobStatus;
+			
+		if (optPac.isPresent()) {
+			blobPac = String.format("\tPaciente: %s\n", optPac.get().getNome());
+		} else {
+			blobPac = String.format("\tPaciente: ...\n");
+		}
 		
+		if (optMed.isPresent()) {
+			blobMed = String.format("\tMédico: %s\n", optMed.get().getNome());
+		} else {
+			blobMed = "\tMédico: ...\n";
+		}
+		
+		if (optDat.isPresent()) {
+			blobDat = String.format("\tData: %s\n", optDat.get().toString());
+		} else {
+			blobDat = String.format("\tData: ...\n");
+		}
+		
+		if (optStatus.isPresent()) {
+			blobStatus = String.format("\tStatus: %s\n", optStatus.get().toString());
+		} else {
+			blobStatus = String.format("\tStatus: ...\n");
+		}
+		
+		System.out.println(
+			"Sistema Hospitalar - Registro de Consulta\n\n" + 
+			blobPac + blobMed + blobDat + blobStatus +
+			"\n");
 	}
 	
 	public void dspCadInter(
-		
+		Optional<Paciente> optPac, 
+		Optional<Medico> optMed, 
+		Optional<Periodo> optPer, 
+		Optional<Quarto> optQua, 
+		Optional<Status> optStatus
 		) {
+			
+		String blobPac;
+		String blobMed;
+		String blobPer;
+		String blobQua;
+		String blobStatus;
+			
+		if (optPac.isPresent()) {
+			blobPac = String.format("\tPaciente: %s\n", optPac.get().getNome());
+		} else {
+			blobPac = String.format("\tPaciente: ...\n");
+		}
 		
+		if (optMed.isPresent()) {
+			blobMed = String.format("\tMédico: %s\n", optMed.get().getNome());
+		} else {
+			blobMed = "\tMédico: ...\n";
+		}
+		
+		if (optPer.isPresent()) {
+			blobPer = String.format("\tPeriodo: %s\n", optPer.get().toString());
+		} else {
+			blobPer = String.format("\tPeriodo: ...\n");
+		}
+		
+		if (optQua.isPresent()) {
+			blobQua = String.format("\tQuarto: nº%d\n", optQua.get().getId());
+		} else {
+			blobQua = String.format("\tQuarto: ...\n");
+		}
+		
+		if (optStatus.isPresent()) {
+			blobStatus = String.format("\tStatus: %s\n", optStatus.get().toString());
+		} else {
+			blobStatus = String.format("\tStatus: ...\n");
+		}
+		
+		System.out.println(
+			"Sistema Hospitalar - Registro de Internação\n\n" + 
+			blobPac + blobMed + blobPer + blobQua + blobStatus +
+			"\n");
 	}
 	
 	public void dspCadDiag(
-		
+		Optional<Paciente> optPac, 
+		Optional<Medico> optMed, 
+		Optional<LocalDate> optDat, 
+		Optional<String> optConc,
+		Optional<String> optPres
 		) {
+			
+		String blobPac;
+		String blobMed;
+		String blobDat;
+		String blobConc;
+		String blobPres;
+			
+		if (optPac.isPresent()) {
+			blobPac = String.format("\tPaciente: %s\n", optPac.get().getNome());
+		} else {
+			blobPac = String.format("\tPaciente: ...\n");
+		}
 		
+		if (optMed.isPresent()) {
+			blobMed = String.format("\tMédico: %s\n", optMed.get().getNome());
+		} else {
+			blobMed = "\tMédico: ...\n";
+		}
+		
+		if (optDat.isPresent()) {
+			blobDat = String.format("\tData: %s\n", optDat.get().toString());
+		} else {
+			blobDat = String.format("\tData: ...\n");
+		}
+		
+		if (optConc.isPresent()) {
+			blobConc = String.format("\tConclusão: %s\n", optConc.get());
+		} else {
+			blobConc = String.format("\tConclusão: ...\n");
+		}
+		
+		if (optPres.isPresent()) {
+			blobPres = String.format("\tPrescrição: %s\n", optPres.get());
+		} else {
+			blobPres = String.format("\tPrescrição: ...\n");
+		}
+		
+		System.out.println(
+			"Sistema Hospitalar - Registro de Diagnóstico\n\n" + 
+			blobPac + blobMed + blobDat + blobConc + blobPres +
+			"\n");
 	}
 	
 	public void dspAtuzCons(
@@ -165,18 +290,6 @@ public class UI {
 	}
 	
 	public void dspAtuzInter(
-		
-		) {
-		
-	}
-	
-	public void dspRemPac(
-		
-		) {
-		
-	}
-	
-	public void dspRemMed(
 		
 		) {
 		
@@ -209,16 +322,18 @@ public class UI {
 	}
 	
 	public void dspEnumEspecializacao() {
-		System.out.println("Especializações (utilize o termo da esquerda):\n");
+		System.out.println("Especializações (utilize o termo da esquerda):");
 		for (Especializacao esp : Especializacao.values()) {
-			System.out.println(String.format("\t%s\t%s\n", esp.name(), esp.toString()));
+			System.out.println(String.format("\t%s\t%s", esp.name(), esp.toString()));
 		}
+		System.out.println("");
 	}
 	
-	public void dspEnumUfs() {
-		System.out.println("Unidades Federativas (utilize o termo da esquerda):\n");
+	public void dspEnumUf() {
+		System.out.println("Unidades Federativas (utilize o termo da esquerda):");
 		for (UF uf : UF.values()) {
-			System.out.println(String.format("\t%s\t%s\n", uf.name(), uf.toString()));
+			System.out.println(String.format("\t%s\t%s", uf.name(), uf.toString()));
 		}
+		System.out.println("");
 	}
 }

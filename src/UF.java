@@ -34,7 +34,8 @@ enum UF {
 		this.nomeUf = nomeUf;
 	}
 	
-	public String getUF(){
+	@Override
+	public String toString(){
 		return nomeUf;
 	}
 }

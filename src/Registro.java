@@ -13,8 +13,8 @@ public class Registro {
 	HashMap<Integer, Quarto> quartos = new HashMap<Integer, Quarto>();
 	
 	////
-	Paciente getPaciente(int cpf)		{return this.pacientes.get(cpf);}
-	Medico getMedico(int cpf)			{return this.medicos.get(cpf);}
+	Paciente getPaciente(String cpf)		{return this.pacientes.get(cpf);}
+	Medico getMedico(String cpf)			{return this.medicos.get(cpf);}
 	Consulta getConsulta(int id)		{return this.consultas.get(id);}
 	Internacao getInternacao(int id)	{return this.internacoes.get(id);}
 	Diagnostico getDiagnostico(int id)	{return this.diagnosticos.get(id);}
@@ -43,7 +43,7 @@ public class Registro {
 	public String toStringPacientes(){
 		String blob = "~ Pacientes ~\n";
 		for (Paciente paciente : pacientes.values()) {
-			blob = blob + "\t" + paciente.toString() + "\n";
+			blob = blob + paciente.toString() + "\n\n";
 		}
 		return blob;
 	}
@@ -51,7 +51,7 @@ public class Registro {
 	public String toStringMedicos(){
 		String blob = "~ Médicos ~\n";
 		for (Medico medico : medicos.values()) {
-			blob = blob + "\t" + medico.toString() + "\n";
+			blob = blob + medico.toString() + "\n\n";
 		}
 		return blob;
 	}
@@ -59,7 +59,7 @@ public class Registro {
 	public String toStringConsultas(){
 		String blob = "\n~ Consultas ~\n";
 		for (int i = 0; i < consultas.size(); i++) {
-			blob = blob + String.format("nº%d", Integer.toString(i)) + consultas.get(i).toString() + "\n";
+			blob = blob + String.format("nº%d", i) + consultas.get(i).toString() + "\n\n";
 		}
 		return blob;
 	}
@@ -67,7 +67,7 @@ public class Registro {
 	public String toStringInternacoes(){
 		String blob = "\n~ Internações ~\n";
 		for (int i = 0; i < internacoes.size(); i++) {
-			blob = blob + String.format("nº%d", Integer.toString(i)) + internacoes.get(i).toString() + "\n";
+			blob = blob + String.format("nº%d", i) + internacoes.get(i).toString() + "\n\n";
 		}
 		return blob;
 	}
@@ -75,7 +75,7 @@ public class Registro {
 	public String toStringDiagnosticos(){
 		String blob = "\n~ Diagnósticos ~\n";
 		for (int i = 0; i < diagnosticos.size(); i++) {
-			blob = blob + String.format("nº%d", Integer.toString(i)) + diagnosticos.get(i).toString() + "\n";
+			blob = blob + String.format("nº%d", i) + diagnosticos.get(i).toString() + "\n\n";
 		}
 		return blob;
 	}
@@ -83,7 +83,7 @@ public class Registro {
 	public String toStringPlanos(){
 		String blob = "\n~ Planos ~\n";
 		for (Plano plano : planos.values()) {
-			blob = blob + plano.toString() + "\n";
+			blob = blob + plano.toString() + "\n\n";
 		}
 		return blob;
 	}
@@ -91,7 +91,7 @@ public class Registro {
 	public String toStringQuartos(){
 		String blob = "\n~ Quartos ~\n";
 		for (Quarto quarto : quartos.values()) {
-			blob = blob + quarto.toString() + "\n";
+			blob = blob + quarto.toString() + "\n\n";
 		}
 		return blob;
 	}
