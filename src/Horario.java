@@ -13,6 +13,9 @@ public class Horario {
 		return (t0 < t1) && (t0 >= 0) && (t1 >= 1) && (t0 <= 23) && (t1 <= 24);
 	}
 	
+	public int getT0(){return this.t0;}
+	public int getT1(){return this.t1;}
+	
 	@Override
 	public String toString() {
 		return String.format(

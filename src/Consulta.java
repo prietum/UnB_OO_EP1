@@ -1,20 +1,21 @@
 import java.time.*;
 
 public class Consulta {
-	private Paciente pac;
 	private Medico med;
+	private Paciente pac;
 	private LocalDate dat;
 	private Status status; //0==agendada, 1==concluida, 2==cancelada
 	
-	Consulta(Paciente pac, Medico med, LocalDate dat, Status status) {
-		this.pac = pac;
+	Consulta(Medico med, Paciente pac, LocalDate dat, Status status) {
 		this.med = med;
+		this.pac = pac;
 		this.dat = dat;
 		this.status = status;
 	}
 	
-	void setConcluido(){this.status.setConcluido();}
-	void setCancelado(){this.status.setCancelado();}
+	public Status getStatus(){return this.status;}
+	public void setConcluido(){this.status.setConcluido();}
+	public void setCancelado(){this.status.setCancelado();}
 	
 	@Override
 	public String toString() {

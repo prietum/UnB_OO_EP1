@@ -11,9 +11,8 @@ public class UI {
 		System.out.printf(String.format(
 			"Sistema Hospitalar - Menu Principal\n\n" +
 			"1. Atendimento\n" +
-			"2. Administração\n" +
-			"3. Registro\n" +
-			"4. Sair\n\n"
+			"2. Registro\n" +
+			"3. Sair\n\n"
 			));
 	}
 	
@@ -22,12 +21,14 @@ public class UI {
 			"Sistema Hospitalar - Atendimento\n\n" +
 			"1. Cadastrar paciente\n" +
 			"2. Cadastrar médico\n" +
-			"3. Cadastrar consulta\n" +
-			"4. Cadastrar internação\n\n" +
-			"5. Cadastrar diagnóstico\n\n" +
+			"3. Registrar consulta\n" +
+			"4. Registrar internação\n" +
+			"5. Registrar diagnóstico\n" +
+			"6. Adicionar quarto\n" +
+			"7. Adicionar plano\n\n" +
 			
-			"6. Atualizar consulta\n" +
-			"7. Atualizar internação\n\n"
+			"8. Atualizar consulta\n" +
+			"9. Atualizar internação\n\n"
 			));
 	}
 	
@@ -285,14 +286,14 @@ public class UI {
 	
 	public void dspAtuzCons(
 		Optional<Integer> optConsId, //id da consulta
-		Optional<Integer> optDec, //Dec -> decisao
+		Optional<Integer> optDec //Dec -> decisao
 		) {
 		
 		String blobCons;
 		String blobDec;
 		
 		if (optConsId.isPresent()) {
-			blobCons = String.format("\tConsulta: nº%d\n");
+			blobCons = String.format("\tConsulta: nº%d\n", optConsId.get());
 		} else {
 			blobCons = String.format("\tConsulta: ...\n");
 		}
@@ -317,14 +318,14 @@ public class UI {
 	
 	public void dspAtuzInter(
 		Optional<Integer> optInterId, //id da internacao
-		Optional<Integer> optDec,  //Dec -> decisao
+		Optional<Integer> optDec  //Dec -> decisao
 		) {
 		
 		String blobInter;
 		String blobDec;
 		
 		if (optInterId.isPresent()) {
-			blobInter = String.format("\tInternação: nº%d\n");
+			blobInter = String.format("\tInternação: nº%d\n", optInterId.get());
 		} else {
 			blobInter = String.format("\tInternação: ...\n");
 		}
@@ -347,20 +348,71 @@ public class UI {
 			"\n");
 	}
 	
-	public void dspMenuAdmin() {
+	public void dspCadQua(
+		Optional<Integer> optId
+		) {
+			
+		String blobId;
+			
+		if (optId.isPresent()) {
+			blobId = String.format("\tNúmero: %d\n", optId.get());
+		} else {
+			blobId = String.format("\tNúmero: ...\n");
+		}
+		
 		System.out.println(
-			"Sistema Hospitalar - Administração\n\n" +
-			"1. Gerir quartos\n" +
-			"2. Gerir planos\n"
-		);
+			"Sistema Hospitalar - Adicionar quarto\n\n" + blobId +
+			"\n");
+	}
+	
+	public void dspCadPla(
+		Optional<Integer> optId,
+		Optional<String> optNome, 
+		Optional<Float> optDesco, 
+		Optional<Float> optCusto
+		) {
+			
+		String blobId;
+		String blobNome;
+		String blobDesco;
+		String blobCusto;
+			
+		if (optId.isPresent()) {
+			blobId = String.format("\tNúmero: %d\n", optId.get());
+		} else {
+			blobId = String.format("\tNúmero: ...\n");
+		}
+		
+		if (optNome.isPresent()) {
+			blobNome = String.format("\tNome: %s\n", optNome.get());
+		} else {
+			blobNome = "\tNome: ...\n";
+		}
+		
+		if (optDesco.isPresent()) {
+			blobDesco = String.format("\tDesconto: %f%%\n", optDesco.get()*100);
+		} else {
+			blobDesco = String.format("\tDesconto: ...\n");
+		}
+		
+		if (optCusto.isPresent()) {
+			blobCusto = String.format("\tCusto: R$%s\n", optCusto.get());
+		} else {
+			blobCusto = String.format("\tCusto: ...\n");
+		}
+		
+		System.out.println(
+			"Sistema Hospitalar - Registro de Consulta\n\n" + 
+			blobId + blobNome + blobDesco + blobCusto +
+			"\n");
 	}
 	
 	public void dspMenuReg() {
 		System.out.println(
 			"Sistema Hospitalar - Registro\n\n" +
 			"1. Printar registro\n" +
-			"2. Salvar registro atual\n" +
-			"3. Exportar registro para .txt\n"
+			"2. Salvar registro atual em data.csv\n" +
+			"3. Exportar registro atual em export.csv\n"
 		);
 	}
 	

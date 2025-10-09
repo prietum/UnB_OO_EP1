@@ -80,7 +80,7 @@ public class Leitor {
 	
 	public Leitura lerFlo(float n, float m) {
 		if (n > m) {
-			return new Leitura(String.format("Insira um número entre %d e %d.", n, m), false);
+			return new Leitura(String.format("Insira um número entre %f e %f.", n, m), false);
 		} else {
 			Leitura ltr = this.lerFlo();
 			if (!ltr.isOk()) {
@@ -92,7 +92,7 @@ public class Leitor {
 			if (n <= f && f <= m) {
 				return ltr;
 			} else {
-				return new Leitura(String.format("Insira um número entre %d e %d.", n, m), false);
+				return new Leitura(String.format("Insira um número entre %f e %f.", n, m), false);
 			}
 		}
 	}
@@ -106,7 +106,7 @@ public class Leitor {
 		float f = ltr.getFlo();
 			
 		if (n > f) {
-			return new Leitura(String.format("Insira um número maior ou igual a %d.", n), false);
+			return new Leitura(String.format("Insira um número maior ou igual a %f.", n), false);
 		}
 		
 		return ltr;

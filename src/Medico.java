@@ -1,10 +1,10 @@
 public class Medico extends Pessoa {
 	private Crm crm;
 	private Especializacao esp;
-	private double custo;
+	private float custo;
 	private Horario hor;
 	
-	Medico(String nome, Cpf cpf, int idade, Crm crm, Especializacao esp, double custo, Horario hor) {
+	Medico(String nome, Cpf cpf, int idade, Crm crm, Especializacao esp, float custo, Horario hor) {
 		this.setNome(nome);
 		this.setCpf(cpf);
 		this.setIdade(idade);
@@ -14,6 +14,11 @@ public class Medico extends Pessoa {
 		this.custo = custo;
 		this.hor = hor;
 	}
+	
+	public Crm getCrm(){return this.crm;}
+	public Especializacao getEsp(){return this.esp;}
+	public float getCusto(){return this.custo;}
+	public Horario getHor(){return this.hor;}
 	
 	@Override
 	public String toString(){

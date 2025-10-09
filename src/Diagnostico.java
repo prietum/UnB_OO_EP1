@@ -3,8 +3,8 @@ import java.time.*;
 public class Diagnostico {
 	private Paciente pac;
 	private Medico med;
-	private String conclusao;
 	private LocalDate dat;
+	private String conclusao;
 	private String pres;
 	
 	Diagnostico(Medico med, Paciente pac, LocalDate dat, String conclusao, String pres) {

@@ -16,7 +16,7 @@ public class Main {
 	private void pcsMenuPrincipal() {
 		ui.dspMenuPrincipal();
 		
-		Leitura ltr = leitor.lerInt(1,4);
+		Leitura ltr = leitor.lerInt(1,3);
 		if (ltr.isOk()) {
 			stt = ltr.getInt();
 		} else {
@@ -31,26 +31,10 @@ public class Main {
 	private void pcsMenuAtend() {
 		ui.dspMenuAtend();
 		
-		Leitura ltr = leitor.lerInt(1,7);
+		Leitura ltr = leitor.lerInt(1,9);
 		int c;
 		if (ltr.isOk()) {
 			stt = Integer.parseInt("1"+Integer.toString(ltr.getInt()));
-		} else {
-			ui.dspClear();
-			System.out.println(ltr.getStr());
-			return;
-		}
-		
-		ui.dspClear();
-	}
-	
-	private void pcsMenuAdmin() {
-		ui.dspMenuAdmin();
-		
-		Leitura ltr = leitor.lerInt(1,2);
-		int c;
-		if (ltr.isOk()) {
-			stt = Integer.parseInt("2"+Integer.toString(ltr.getInt()));
 		} else {
 			ui.dspClear();
 			System.out.println(ltr.getStr());
@@ -66,7 +50,7 @@ public class Main {
 		Leitura ltr = leitor.lerInt(1,3);
 		int c;
 		if (ltr.isOk()) {
-			stt = Integer.parseInt("3"+Integer.toString(ltr.getInt()));
+			stt = Integer.parseInt("2"+Integer.toString(ltr.getInt()));
 		} else {
 			ui.dspClear();
 			System.out.println(ltr.getStr());
@@ -96,7 +80,7 @@ public class Main {
 			
 			if (nome == null) {
 				System.out.println("Digite o nome do paciente.\n");
-				Leitura ltr = leitor.lerString();
+				Leitura ltr = leitor.lerString(true);
 				
 				if (!ltr.isOk()) {
 					ui.dspClear();
@@ -487,6 +471,7 @@ public class Main {
 				
 				String str = ltr.getStr();
 				dat = LocalDate.parse(str);
+				ui.dspClear();
 				
 			} else if (status == null) {
 				System.out.println("Digite o status da consulta:\n\t0 == Agendada;\n\t1 == Concluída\n\t2 == Cancelada");
@@ -500,6 +485,7 @@ public class Main {
 				
 				int i = ltr.getInt();
 				status = new Status(i);
+				ui.dspClear();
 				
 			} else {
 				System.out.println("Confirmar? (y/n)");
@@ -518,7 +504,7 @@ public class Main {
 		
 		ui.dspClear();
 		if (confirma) {
-			Consulta cons = new Consulta(pac, med, dat, status);
+			Consulta cons = new Consulta(med, pac, dat, status);
 			reg.addConsulta(cons);
 			
 			System.out.println("A consulta foi adicionada ao registro.");
@@ -698,6 +684,7 @@ public class Main {
 				
 				int i = ltr.getInt();
 				status = new Status(i);
+				ui.dspClear();
 				
 			} else {
 				System.out.println("Confirmar? (y/n)");
@@ -716,7 +703,7 @@ public class Main {
 		
 		ui.dspClear();
 		if (confirma) {
-			Internacao inter = new Internacao(pac, med, per, qua, status);
+			Internacao inter = new Internacao(med, pac, per, qua, status);
 			reg.addInternacao(inter);
 			
 			System.out.println("A internação foi adicionada ao registro.");
@@ -812,6 +799,7 @@ public class Main {
 				
 				String str = ltr.getStr();
 				dat = LocalDate.parse(str);
+				ui.dspClear();
 				
 			} else if (conc == null) {
 				System.out.println("Escreva o que foi concluído no diagnóstico (sintomas, etc).");
@@ -825,6 +813,7 @@ public class Main {
 				
 				String str = ltr.getStr();
 				conc = str;
+				ui.dspClear();
 				
 			} else if (pres == null) {
 				System.out.println("Escreva o que foi prescrito para o paciente no diagnóstico (remédios, etc).");
@@ -838,6 +827,7 @@ public class Main {
 				
 				String str = ltr.getStr();
 				pres = str;
+				ui.dspClear();
 				
 			} else {
 				System.out.println("Confirmar? (y/n)");
@@ -879,21 +869,21 @@ public class Main {
 		}
 		
 		Integer consId = null;
-		Consulta cons = null
+		Consulta cons = null;
 		Integer dec = null;
 		
-		boolean confirma;
+		boolean confirma = false;
 		
 		while (true) {
 			ui.dspAtuzCons(
 				Optional.ofNullable(consId),
-				Optional.ofNullable(dec),
+				Optional.ofNullable(dec)
 			);
 			
 			if (consId == null) {
 				System.out.println(reg.toStringConsultas());
 				System.out.println("Digite o nº da consulta. Apenas consultas com status de \"agendada\" podem ser atualizadas.\n");
-				Leitura ltr = leitor.lerInt();
+				Leitura ltr = leitor.lerInt(1,reg.getConsultasSize());
 				
 				if (!ltr.isOk()) {
 					ui.dspClear();
@@ -902,7 +892,7 @@ public class Main {
 				}
 				
 				int i = ltr.getInt();
-				Consulta temp = reg.getConsulta(i);
+				Consulta temp = reg.getConsulta(i-1);
 				if (temp == null) {
 					ui.dspClear();
 					System.out.println(String.format("Não existe consulta com nº %d.", i));
@@ -913,11 +903,11 @@ public class Main {
 				cons = temp;
 				ui.dspClear();
 				
-				if (cons.getStatus.getInt() != 0) {
+				if (cons.getStatus().getInt() != 0) {
 					dec = 2;
 				}
 				
-			} else if (cons.getStatus.getInt() == 0) {
+			} else if (cons.getStatus().getInt() == 0) {
 				if (dec == null) {
 					System.out.println("Digite 0 para concluir a consulta e 1 para cancelar a consulta.\n");
 					Leitura ltr = leitor.lerInt(0,1);
@@ -935,7 +925,7 @@ public class Main {
 					
 				} else {
 					System.out.println("Confirmar? (y/n)");
-					leitor.pause();
+					Leitura ltr = leitor.lerBoo();
 					
 					if (!ltr.isOk()) {
 						ui.dspClear();
@@ -948,7 +938,7 @@ public class Main {
 				}
 			} else {
 				System.out.println("Não há como atualizar uma consulta já concluída ou cancelada. Pressione Enter para prosseguir para o menu principal.");
-				leitor.pause();
+				leitor.pausa();
 				
 				break;
 			}
@@ -982,21 +972,21 @@ public class Main {
 		}
 		
 		Integer interId = null;
-		Internacao inter = null
+		Internacao inter = null;
 		Integer dec = null;
 		
-		boolean confirma;
+		boolean confirma = false;
 		
 		while (true) {
 			ui.dspAtuzCons(
 				Optional.ofNullable(interId),
-				Optional.ofNullable(dec),
+				Optional.ofNullable(dec)
 			);
 			
 			if (interId == null) {
 				System.out.println(reg.toStringInternacoes());
 				System.out.println("Digite o nº da internação. Apenas internações com status de \"agendada\" podem ser atualizadas.\n");
-				Leitura ltr = leitor.lerInt();
+				Leitura ltr = leitor.lerInt(1,reg.getInternacoesSize());
 				
 				if (!ltr.isOk()) {
 					ui.dspClear();
@@ -1005,7 +995,7 @@ public class Main {
 				}
 				
 				int i = ltr.getInt();
-				Internacao temp = reg.getInternacao(i);
+				Internacao temp = reg.getInternacao(i-1);
 				if (temp == null) {
 					ui.dspClear();
 					System.out.println(String.format("Não existe internação com nº %d.", i));
@@ -1016,11 +1006,11 @@ public class Main {
 				inter = temp;
 				ui.dspClear();
 				
-				if (inter.getStatus.getInt() != 0) {
+				if (inter.getStatus().getInt() != 0) {
 					dec = 2;
 				}
 				
-			} else if (cons.getStatus.getInt() == 0) {
+			} else if (inter.getStatus().getInt() == 0) {
 				if (dec == null) {
 					System.out.println("Digite 0 para concluir a internação e 1 para cancelar a internação.\n");
 					Leitura ltr = leitor.lerInt(0,1);
@@ -1038,7 +1028,7 @@ public class Main {
 					
 				} else {
 					System.out.println("Confirmar? (y/n)");
-					leitor.pause();
+					Leitura ltr = leitor.lerBoo();
 					
 					if (!ltr.isOk()) {
 						ui.dspClear();
@@ -1051,13 +1041,14 @@ public class Main {
 				}
 			} else {
 				System.out.println("Não há como atualizar uma internação já concluída ou cancelada. Pressione Enter para prosseguir para o menu principal.");
-				leitor.pause();
+				leitor.pausa();
 				
 				break;
 			}
 		}
 		
 		ui.dspClear();
+		
 		if (confirma) {
 			if (dec == 0) {
 				inter.setConcluido();
@@ -1074,17 +1065,155 @@ public class Main {
 		stt = 0;
 	}
 	
-	private void pcsGerQuar() {
-		System.out.println("Em stt: " + Integer.toString(stt));
-		leitor.pausa();
+	private void pcsCadQua() {
+		Integer id = null;
+		
+		boolean confirma;
+		
+		while (true) {
+			ui.dspCadQua(
+				Optional.ofNullable(id)
+			);
+			
+			if (id == null) {
+				System.out.println("Digite o número do quarto (entre 101 e 909).\n");
+				Leitura ltr = leitor.lerInt(101,909);
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				int i = ltr.getInt();
+				id = i;
+				ui.dspClear();
+				
+			} else {
+				System.out.println("Confirmar? (y/n)");
+				Leitura ltr = leitor.lerBoo();
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				confirma = ltr.getBoo();
+				break;
+			}
+		}
+		
 		ui.dspClear();
+		if (confirma) {
+			Quarto qua = new Quarto(id);
+			reg.putQuarto(qua);
+			
+			System.out.println("O quarto foi adicionado.");
+		} else {
+			System.out.println("O quarto NÃO foi adicionado.");
+		}
+		
 		stt = 0;
 	}
 	
-	private void pcsGerPlan() {
-		System.out.println("Em stt: " + Integer.toString(stt));
-		leitor.pausa();
+	private void pcsCadPla() {
+		Integer id = null;
+		String nome = null;
+		Float desco = null;
+		Float custo = null;
+		
+		boolean confirma;
+		
+		while (true) {
+			ui.dspCadPla(
+				Optional.ofNullable(id),
+				Optional.ofNullable(nome),
+				Optional.ofNullable(desco),
+				Optional.ofNullable(custo)
+			);
+			
+			if (id == null) {
+				System.out.println("Digite o número do plano.\n");
+				Leitura ltr = leitor.lerInt();
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				int i = ltr.getInt();
+				id = i;
+				ui.dspClear();
+				
+			} else if (nome == null) {
+				System.out.println("Digite o nome do plano.\n");
+				Leitura ltr = leitor.lerString();
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				String str = ltr.getStr();
+				nome = str;
+				ui.dspClear();
+				
+			} else if (desco == null) {
+				System.out.println("Digite o desconto do plano (entre 0 e 100).\n");
+				Leitura ltr = leitor.lerFlo(0, 100);
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				float f = ltr.getFlo();
+				desco = f/100;
+				ui.dspClear();
+				
+			} else if (custo == null) {
+				System.out.println("Digite o custo do plano (maior que 0).\n");
+				Leitura ltr = leitor.lerFlo(0);
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				float f = ltr.getFlo();
+				custo = f;
+				ui.dspClear();
+				
+			} else {
+				System.out.println("Confirmar? (y/n)");
+				Leitura ltr = leitor.lerBoo();
+				
+				if (!ltr.isOk()) {
+					ui.dspClear();
+					System.out.println(ltr.getStr());
+					continue;
+				}
+				
+				confirma = ltr.getBoo();
+				break;
+			}
+		}
+		
 		ui.dspClear();
+		if (confirma) {
+			Plano pla = new Plano(id, nome, desco, custo);
+			reg.putPlano(pla);
+			
+			System.out.println("O plano foi adicionado.");
+		} else {
+			System.out.println("O plano NÃO foi adicionado.");
+		}
+		
 		stt = 0;
 	}
 	
@@ -1126,19 +1255,17 @@ public class Main {
 						case 13: pcsCadCons(); break;		//cadastra consulta
 						case 14: pcsCadInter(); break;		//cadastra internacao
 						case 15: pcsCadDiag(); break;		//cadastra diagnostico
-						case 16: pcsAtuzCons(); break;		//atualiza consulta
-						case 17: pcsAtuzInter(); break;		//atualiza internacao
+						case 16: pcsCadQua(); break;		//cadastra quarto
+						case 17: pcsCadPla(); break;		//cadastra plano
+						case 18: pcsAtuzCons(); break;		//atualiza consulta
+						case 19: pcsAtuzInter(); break;		//atualiza internacao
 						
-					case 2: pcsMenuAdmin(); break;
-						case 21: pcsGerQuar(); break;		//gerir quartos
-						case 22: pcsGerPlan(); break;		//gerir planos
+					case 2: pcsMenuReg(); break;
+						case 21: pcsPrtReg(); break;		//printar registro
+						case 22: pcsExpReg(); break;		//exportar registro para data.txt
+						case 23: pcsSavReg(); break;		//salvar registro em /data/*.csv
 						
-					case 3: pcsMenuReg(); break;
-						case 31: pcsPrtReg(); break;		//printar registro
-						case 32: pcsExpReg(); break;		//exportar registro para data.txt
-						case 33: pcsSavReg(); break;		//salvar registro em /data/*.csv
-						
-					case 4: running = false; break;			//sair
+					case 3: running = false; break;			//sair
 				
 				default: stt = 0;
 			}
